@@ -1,0 +1,32 @@
+https://patch-diff.githubusercontent.com/raw/xmms2/xmms2-devel/pull/8.patch
+
+From e37684af92a1acccbc4f924f2c65fa049f6cbe94 Mon Sep 17 00:00:00 2001
+From: Sergei Trofimovich <slyich@gmail.com>
+Date: Sat, 2 Oct 2021 21:39:25 +0100
+Subject: [PATCH] waftools/man.py: add support for SOURCE_DATE_EPOCH
+
+When packaging xmms2 for NixOS I noticed single non-deterministic
+file: xmms2 manpage. Let's allow distributions to override manpage
+timestamp with standard SOURCE_DATE_EPOCH environment variable.
+---
+ waftools/man.py | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/waftools/man.py b/waftools/man.py
+index 06db55502..e06a31332 100644
+--- a/waftools/man.py
++++ b/waftools/man.py
+@@ -14,7 +14,12 @@ def gzip_func(task):
+     try:
+         input = open(infile, 'rb')
+         outf = open(outfile, 'wb')
+-        output = gzip.GzipFile(os.path.basename(infile), fileobj=outf)
++        # Allow building deterministic manpages:
++        #   https://reproducible-builds.org/docs/source-date-epoch/
++        mtime = os.environ.get('SOURCE_DATE_EPOCH')
++        if mtime:
++            mtime = int(mtime)
++        output = gzip.GzipFile(os.path.basename(infile), fileobj=outf, mtime=mtime)
+         output.write(input.read())
+     finally:
+         if input:
