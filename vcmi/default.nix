@@ -15,11 +15,13 @@
 , qtbase
 , tbb
 , zlib
+
+, unstableGitUpdater
 }:
 
 mkDerivation rec {
   pname = "vcmi";
-  version = "0.99.0+unstable=2022-01-15";
+  version = "unstable-2022-01-04";
 
   src = fetchFromGitHub {
     owner = "vcmi";
@@ -59,6 +61,10 @@ mkDerivation rec {
     # Meawhile work it around by passing relative value.
     "-DCMAKE_INSTALL_LIBDIR=lib"
   ];
+
+  passthru.updateScript = unstableGitUpdater {
+    url = "https://github.com/vcmi/vcmi.git";
+  };
 
   meta = with lib; {
     description = "open-source engine for Heroes of Might and Magic III";
