@@ -41,6 +41,7 @@ final: prev: gen_overrides prev [
   "iftop"
   "intercal"
   "jamin"
+  "jfsutils"
   "lcdproc"
 
   "libbladeRF"
@@ -52,6 +53,7 @@ final: prev: gen_overrides prev [
   "minicom"
   "mmh"
   "ncftp"
+  "nuweb"
   "openbgpd"
   "otter" # marked broken
 
@@ -59,7 +61,7 @@ final: prev: gen_overrides prev [
   "pipewire_0_2"
   "quake3e"
   "reaverwps"
-  "remake"
+  #"remake" # asked for a new release
 
   "rockbox_utility"
   "sil"
@@ -69,7 +71,6 @@ final: prev: gen_overrides prev [
 
   "tinyfugue"
   "transcode"
-  "typespeed"
   "uget"
   "uim"
 

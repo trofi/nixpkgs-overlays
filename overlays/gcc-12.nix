@@ -25,6 +25,7 @@ final: prev: gen_overrides prev [
   #"byzanz" # volatile/glib
   #"cbftp" # nlohmann_json string ambig
   #"cgal" # string(null)
+  #"chia-plotter" # alignment is invalid
   #"coin" # string(null)
   #"coin3d" # std::string(NULL)
   #"crawl" # std::string(NULL)

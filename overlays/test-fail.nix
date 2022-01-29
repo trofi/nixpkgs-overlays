@@ -31,5 +31,7 @@ final: prev: gen_overrides prev [
   #"spdlog"
   # "php-intl" tests fail
 
+  #"libuv"
+
   #"arc_unpacker" # needs older boost
 ]

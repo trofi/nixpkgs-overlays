@@ -37,7 +37,7 @@ final: prev: gen_overrides prev [
   "libappindicator-gtk3" # headers deps
   "libappindicator-gtk2" # headers deps
 
-  "libf2c" # headers deps?
+  #"libf2c" # headers deps?
 
   "mlkit"
   "mlton20130715"
@@ -53,9 +53,6 @@ final: prev: gen_overrides prev [
   "procdump"
 
   #"ocaml-mysql" # parallel build failure
-
-  #lwe/iwlib.h:61:10: fatal error: wireless.h: No such file or directory
-  "reaverwps"
 
   #"camlzip"
   #"scsh" # file access, serial?
