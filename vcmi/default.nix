@@ -62,6 +62,8 @@ mkDerivation rec {
     "-DCMAKE_INSTALL_LIBDIR=lib"
   ];
 
+  # Update as:
+  #    nix-shell ./maintainers/scripts/update.nix --argstr package vcmi --arg include-overlays true
   passthru.updateScript = unstableGitUpdater {
     url = "https://github.com/vcmi/vcmi.git";
   };
