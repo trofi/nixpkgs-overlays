@@ -34,10 +34,12 @@ final: prev: gen_overrides prev [
 
   "lazarus-qt"
 
-  "libappindicator-gtk3" # headers deps
-  "libappindicator-gtk2" # headers deps
-
-  #"libf2c" # headers deps?
+  #app-indicator.c:45:10: fatal error: application-service-marshal.h: No such file or directory
+  #  45 | #include "application-service-marshal.h"
+  #compilation terminated.
+  #make[2]: *** [Makefile:788: libappindicator3_la-app-indicator.lo] Error 1
+  # "libappindicator-gtk3" # headers deps
+  # "libappindicator-gtk2" # headers deps
 
   "mlkit"
   "mlton20130715"
@@ -48,9 +50,6 @@ final: prev: gen_overrides prev [
   "netboot" # libtool uses incomplete files?
 
   "patchutils" # parallel tests fail, file collision
-
-  # Fatal error: can't create obj/ProcDumpTestApplication.o: No such file or directory
-  "procdump"
 
   #"ocaml-mysql" # parallel build failure
 
