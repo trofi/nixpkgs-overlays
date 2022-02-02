@@ -27,7 +27,7 @@
 , libsndfile
 , libvorbis
 , python3Packages
-#, perlPackages
+, perlPackages
 , pkg-config
 , readline
 , speex
@@ -101,7 +101,8 @@ stdenv.mkDerivation rec {
     libsndfile
     libvorbis
     readline
-    #perlPackages.PodParser
+    #TODO: plugin path
+    #perlPackages.perl
     pypkgs.python
     speex
     sqlite
@@ -110,6 +111,9 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     pkg-config
+    #TODO: plugin path
+    #perlPackages.perl
+    perlPackages.PodParser
     pypkgs.cython
     pypkgs.python
     wafHook
