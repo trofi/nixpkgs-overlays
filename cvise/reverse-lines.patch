@@ -1,0 +1,18 @@
+Chipping unused files from end to beginning can be more
+efficient when there are top-to-bottom dependencies in
+the file. Typical top-to-bottom is:
+    <declaration>
+    <definition>
+    <single-use>
+--- a/cvise/passes/lines.py
++++ b/cvise/passes/lines.py
+@@ -48,7 +48,9 @@ class LinesPass(AbstractPass):
+             data = in_file.readlines()
+ 
+         old_len = len(data)
++        data.reverse()
+         data = data[0:state.index] + data[state.end():]
++        data.reverse()
+         assert len(data) < old_len
+ 
+         tmp = os.path.dirname(test_case)
