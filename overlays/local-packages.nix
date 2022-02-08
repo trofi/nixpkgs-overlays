@@ -1,6 +1,8 @@
 final: prev: {
   iowatcher = final.callPackage ../iowatcher {};
 
+  multitextor = final.callPackage ../multitextor {};
+
   seekwatcher = final.callPackage ../seekwatcher {};
 
   vcmi = final.libsForQt5.callPackage ../vcmi {
