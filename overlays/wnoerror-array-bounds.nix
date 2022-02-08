@@ -14,13 +14,10 @@ in
 #  { foo = set_wnoerror prev.foo; ... }
 
 final: prev: gen_overrides prev [
-  "criu"
-  "libbladeRF"
-  "mame"
+  #"criu" # array out of bounds
+  #"libbladeRF" # -fcommon
+  #"mame" # Waddress: null comparison on non-null array.
 
   # xorg bug: https://gitlab.freedesktop.org/xorg/xserver/-/issues/1256
-  "xwayland"
-
-  # does not work with nested attrs
-  #"xorg.xorgserver"
+  #"xwayland"
 ]

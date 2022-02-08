@@ -14,5 +14,5 @@ in
 
 final: prev: gen_overrides prev [
   # TODO: fix these upstream
-  "glm"
+  #"glm"
 ]

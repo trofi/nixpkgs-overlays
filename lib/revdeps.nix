@@ -1,3 +1,5 @@
+# Get packages which build input names patch passed package
+#
 # use as:
 #    import ./revdeps.nix "texinfo" pkgs lib
 revdep: pkgs: lib:

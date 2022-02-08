@@ -1,3 +1,5 @@
+# Get packages which derivation mentions passed in dependency explicitly
+#
 # use as:
 #    import ~/.config/nixpkgs/lib/arevdeps.nix linuxHeaders pkgs lib
 revdepAttr: pkgs: lib:

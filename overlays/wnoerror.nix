@@ -15,11 +15,9 @@ in
 
 final: prev: gen_overrides prev [
   # TODO: fix these upstream
-  #"boringssl" # stringop overflow
-  "hexcurse" # nixpkgs' self-influcted failure
-  "dropwatch"
-  "gnuapl"
-  "gnu-efi" # gcc-12
-  "mitscheme"
-  "mstflint"
+
+  #"boringssl" # ptr/array decl mismatch
+  #"gnuapl" # nonnull
+  #"mitscheme" # ptr/array decl mismatch
+  #"mstflint" # -Werror=fall-through
 ]
