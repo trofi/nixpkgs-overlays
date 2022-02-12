@@ -30,6 +30,7 @@ final: prev: gen_overrides prev [
   #"coin3d" # std::string(NULL)
   #"crawl" # std::string(NULL)
   #"csxcad" # string(NULL)
+  #"ctl" # istream is not defined, missing header?
   #"cuneiform" ptr >int comparison
   #"deliantra-server" # c++17: throw(), something else
   #"dbus_cplusplus" # operator>> not seen
@@ -59,6 +60,8 @@ final: prev: gen_overrides prev [
   #"libmemcached" # string(null)
   #"libreoffice" # unknown
   #"libtorrent-rasterbar" # assert, too small buffer
+  #"libwebsockets" # -Werror, overfloww
+  #"lief" # mising <memory>
   #"lockfile-progs" # "%s" is NULL
   #"log4shib" #throw()
   #"lximage-qt"
@@ -80,11 +83,11 @@ final: prev: gen_overrides prev [
   #"pmdk" # param mismatch
   #"pytorch"#builtins
   # qtbase-5.12.10
-  # qtdeclarative-5.14.2
+  # qtdeclarative-5.14.2 # missing imports
   # qtwebengine-5.15 # string(NULL)
   # "root5": null string
   # "root": includes?
-  #"qrupdate" # fortran dimensions
+  #"restool" # -Werror
   #"ripser" # std::max clash
   #"rpcs3" # gcc-12/-11 libstdc++ linking
   #"rlottie" # <limits>
@@ -110,6 +113,7 @@ final: prev: gen_overrides prev [
   #"wimboot" # -Werror array subscript
   #"wownero" # string(NULL)
   #"yap" # int/ptr comparison
+  #"zeek" # string incluson
   #"zeroc-ice" # string(null)
 
   # pending upstream merge:
