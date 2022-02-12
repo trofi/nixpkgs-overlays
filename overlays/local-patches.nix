@@ -13,6 +13,7 @@ final: prev: {
 
   nixUnstable = prev.nixUnstable.overrideAttrs(oa: {
     patches = (oa.patches or []) ++ [
+      ../nix/fix-unexpected-null.patch
       ../nix/swallow-exceptions.patch
     ];
   });
