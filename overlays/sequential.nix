@@ -23,6 +23,8 @@ final: prev: gen_overrides prev [
   #"libappindicator-gtk3" # headers deps
   #"libappindicator-gtk2" # headers deps
 
+  #"libaom" some race in makefile
+
   ## uae> make[2]: *** No rule to make target 'build68kc'.  Stop.
   #"uae"
 ]
