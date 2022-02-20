@@ -13,7 +13,9 @@ final: prev: gen_overrides prev [
   # TODO: fix these upstream
   # TODO: pull some failures from PR and local hacks
 
+  #"ell" # dbus "already exists"
   #"gnat6" # fails sometimes
+  #"go" # TestTimeVDSO
   #"heimdal" # elusive failure
 
   ##app-indicator.c:45:10: fatal error: application-service-marshal.h: No such file or directory
@@ -27,4 +29,6 @@ final: prev: gen_overrides prev [
 
   ## uae> make[2]: *** No rule to make target 'build68kc'.  Stop.
   #"uae"
+
+  #"xmlrpc_c"
 ]
