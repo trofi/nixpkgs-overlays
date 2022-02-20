@@ -1,0 +1,33 @@
+From ccd1f2c312229f5fcd3c9007608e796ffbff4860 Mon Sep 17 00:00:00 2001
+From: Sergei Trofimovich <slyich@gmail.com>
+Date: Sun, 20 Feb 2022 18:50:35 +0000
+Subject: [PATCH] Makefile: use include-what-you-use (not iwyu) binary name
+
+At least on NixOS and Gentoo installed binary is called include-what-you-use
+to follow upstream convention.
+
+I assume debian also installs upstream's native tool name. Let's use that.
+
+Otherwise build fails for me until I override IWYU variable.
+
+Signed-off-by: Sergei Trofimovich <slyich@gmail.com>
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index cfa2229..561ac01 100644
+--- a/Makefile
++++ b/Makefile
+@@ -184,7 +184,7 @@ CHECKPATCH := checkpatch
+ CLANG-TIDY := clang-tidy
+ CPPCHECK   := cppcheck
+ CPPLINT    := cpplint
+-IWYU       := iwyu
++IWYU       := include-what-you-use
+ MANDOC     := mandoc
+ CC  := gcc
+ CPP := gcc -E $(CFLAGS)
+-- 
+2.35.1
+

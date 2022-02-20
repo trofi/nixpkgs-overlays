@@ -1,0 +1,28 @@
+From dcada2ea1b034dacdaca0e3b77606470ed47d995 Mon Sep 17 00:00:00 2001
+From: Sergei Trofimovich <slyich@gmail.com>
+Date: Sun, 20 Feb 2022 18:33:24 +0000
+Subject: [PATCH] checkpatch.1: uppercase .TH tool name
+
+Without the change build fails on mandoc-1.14.6 as:
+
+    mandoc: share/man/man1/checkpatch.1:1:5:
+      STYLE: lower case character in document title: TH checkpatch
+
+Signed-off-by: Sergei Trofimovich <slyich@gmail.com>
+---
+ share/man/man1/checkpatch.1 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/share/man/man1/checkpatch.1 b/share/man/man1/checkpatch.1
+index f817a30..62cb069 100644
+--- a/share/man/man1/checkpatch.1
++++ b/share/man/man1/checkpatch.1
+@@ -1,4 +1,4 @@
+-.TH checkpatch 1 2022-02-07 Linux "User commands"
++.TH CHECKPATCH 1 2022-02-07 Linux "User commands"
+ .SH NAME
+ checkpatch \- check style violations in patches
+ .SH SYNOPSIS
+-- 
+2.35.1
+
