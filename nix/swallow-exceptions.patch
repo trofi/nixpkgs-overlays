@@ -11,12 +11,12 @@ https://github.com/NixOS/nix/issues/6046
      } catch (std::exception & e) {
          printError("error (ignored): %1%", e.what());
 +    } catch(...) {
-+        fprintf(stderr, "%s: unknown exception!", __func__);
++        fprintf(stderr, "%s: unknown exception!\n", __func__);
      }
 +  } catch (std::exception & e) {
-+      fprintf(stderr, "%s: rethown exception: %s", __func__, e.what());
++      fprintf(stderr, "%s: rethown exception: %s\n", __func__, e.what());
 +  } catch(...) {
-+      fprintf(stderr, "%s: rethown unknown exception!", __func__);
++      fprintf(stderr, "%s: rethown unknown exception!\n", __func__);
 +  }
  }
  
