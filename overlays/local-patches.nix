@@ -10,11 +10,4 @@ final: prev: {
       ../cvise/reverse-lines.patch
     ];
   });
-
-  nixUnstable = prev.nixUnstable.overrideAttrs(oa: {
-    patches = (oa.patches or []) ++ [
-      ../nix/fix-unexpected-null.patch
-      ../nix/swallow-exceptions.patch
-    ];
-  });
 }
