@@ -1,4 +1,6 @@
 final: prev: {
+  corsix-th = final.callPackage ../corsix-th {};
+
   checkpatch = final.callPackage ../checkpatch {};
 
   chessutils = final.callPackage ../chessutils {};
@@ -9,9 +11,7 @@ final: prev: {
 
   seekwatcher = final.callPackage ../seekwatcher {};
 
-  vcmi = final.libsForQt5.callPackage ../vcmi {
-    ffmpeg = final.ffmpeg_4;
-  };
+  vcmi = final.libsForQt5.callPackage ../vcmi {};
 
   xmms2 = final.callPackage ../xmms2 {};
 }
