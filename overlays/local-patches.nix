@@ -10,4 +10,10 @@ final: prev: {
       ../cvise/reverse-lines.patch
     ];
   });
+
+  nix = prev.nix.overrideAttrs(oa: {
+    patches = (oa.patches or []) ++ [
+      ../nix/0001-nix-store-gc-account-for-auto-optimised-store.patch
+    ];
+  });
 }
