@@ -14,6 +14,8 @@ final: prev: {
   nix = prev.nix.overrideAttrs(oa: {
     patches = (oa.patches or []) ++ [
       ../nix/0001-nix-store-gc-account-for-auto-optimised-store.patch
+      ../nix/0001-src-libstore-derivations.cc-avoid-istringstream-on-h.patch
+      ../nix/0001-gc-don-t-visit-implicit-referrers-on-gc.patch
     ];
   });
 }

@@ -1,0 +1,36 @@
+From 2d23ad2c314e8608d6dca176dd157a072e5685e6 Mon Sep 17 00:00:00 2001
+From: Sergei Trofimovich <slyich@gmail.com>
+Date: Thu, 17 Mar 2022 18:36:45 +0000
+Subject: [PATCH] gc: don't visit implicit referrers on gc
+
+Before the change garbage collector was not considering
+`.drv` and outputs as alive even if configuration says otherwise.
+
+As a result `nix store gc --dry-run` could visit (and parse)
+`.drv` files multiple times (worst case it's quadratic).
+
+It happens because `alive` set was populating only runtime closure
+without regard for actual configuration.
+
+The change fixes `alive` propagation.
+---
+ src/libstore/gc.cc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/libstore/gc.cc b/src/libstore/gc.cc
+index 69755bd19..f65fb1b2e 100644
+--- a/src/libstore/gc.cc
++++ b/src/libstore/gc.cc
+@@ -678,7 +678,8 @@ void LocalStore::collectGarbage(const GCOptions & options, GCResults & results)
+                 alive.insert(start);
+                 try {
+                     StorePathSet closure;
+-                    computeFSClosure(*path, closure);
++                    computeFSClosure(*path, closure,
++                        /* flipDirection */ false, gcKeepOutputs, gcKeepDerivations);
+                     for (auto & p : closure)
+                         alive.insert(p);
+                 } catch (InvalidPath &) { }
+-- 
+2.35.1
+
