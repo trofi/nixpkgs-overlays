@@ -1,0 +1,95 @@
+From 9174d884d750b7b49a571bd55275f0883c2dabda Mon Sep 17 00:00:00 2001
+From: Sergei Trofimovich <slyich@gmail.com>
+Date: Thu, 24 Mar 2022 08:10:33 +0000
+Subject: [PATCH] lexer: add error location to lexer errors
+
+Before the change lexter errors did not report the location:
+
+    $ nix build -f. mc
+    error: path has a trailing slash
+    (use '--show-trace' to show detailed location information)
+
+Note that it's not clear what file generates the error.
+
+After the change location is reported:
+
+    $ src/nix/nix --extra-experimental-features nix-command build -f ~/nm mc
+    error: path has a trailing slash
+
+           at .../pkgs/development/libraries/glib/default.nix:54:18:
+
+               53|   };
+               54|   src = /tmp/foo/;
+                 |                  ^
+               55|
+    (use '--show-trace' to show detailed location information)
+
+Here we see both problematic file and the string itself.
+---
+ src/libexpr/lexer.l | 23 +++++++++++++++++++----
+ 1 file changed, 19 insertions(+), 4 deletions(-)
+
+diff --git a/src/libexpr/lexer.l b/src/libexpr/lexer.l
+index e276b0467..d574121b0 100644
+--- a/src/libexpr/lexer.l
++++ b/src/libexpr/lexer.l
+@@ -28,6 +28,13 @@ using namespace nix;
+ 
+ namespace nix {
+ 
++static inline Pos makeCurPos(const YYLTYPE & loc, ParseData * data)
++{
++    return Pos(data->origin, data->file, loc.first_line, loc.first_column);
++}
++
++#define CUR_POS makeCurPos(*yylloc, data)
++
+ // backup to recover from yyless(0)
+ YYLTYPE prev_yylloc;
+ 
+@@ -37,7 +44,6 @@ static void initLoc(YYLTYPE * loc)
+     loc->first_column = loc->last_column = 1;
+ }
+ 
+-
+ static void adjustLoc(YYLTYPE * loc, const char * s, size_t len)
+ {
+     prev_yylloc = *loc;
+@@ -147,14 +153,20 @@ or          { return OR_KW; }
+               try {
+                   yylval->n = boost::lexical_cast<int64_t>(yytext);
+               } catch (const boost::bad_lexical_cast &) {
+-                  throw ParseError("invalid integer '%1%'", yytext);
++                  throw ParseError({
++                      .msg = hintfmt("invalid integer '%1%'", yytext),
++                      .errPos = CUR_POS,
++                  });
+               }
+               return INT;
+             }
+ {FLOAT}     { errno = 0;
+               yylval->nf = strtod(yytext, 0);
+               if (errno != 0)
+-                  throw ParseError("invalid float '%1%'", yytext);
++                  throw ParseError({
++                      .msg = hintfmt("invalid float '%1%'", yytext),
++                      .errPos = CUR_POS,
++                  });
+               return FLOAT;
+             }
+ 
+@@ -280,7 +292,10 @@ or          { return OR_KW; }
+ 
+ <INPATH_SLASH>{ANY} |
+ <INPATH_SLASH><<EOF>> {
+-  throw ParseError("path has a trailing slash");
++  throw ParseError({
++      .msg = hintfmt("path has a trailing slash"),
++      .errPos = CUR_POS,
++  });
+ }
+ 
+ {SPATH}     { yylval->path = {yytext, (size_t) yyleng}; return SPATH; }
+-- 
+2.35.1
+
