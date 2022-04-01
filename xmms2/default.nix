@@ -128,6 +128,7 @@ stdenv.mkDerivation rec {
     description = "music player daemon";
     homepage = "https://github.com/xmms2/xmms2-devel";
     license = licenses.gpl2;
+    maintainers = with maintainers; [ trofi ];
     platforms = platforms.linux;
   };
 }

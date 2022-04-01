@@ -52,6 +52,7 @@ stdenv.mkDerivation rec {
     description = "Graph the results of a blktrace run";
     homepage = "http://www.alejandro-colomar.es/src/alx/alx/games/chessutils.git";
     license = licenses.gpl2Plus;
+    maintainers = with maintainers; [ trofi ];
     platforms = platforms.linux;
   };
 }

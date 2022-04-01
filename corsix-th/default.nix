@@ -58,6 +58,7 @@ stdenv.mkDerivation rec {
     description = "open-source clone of Theme Hospital";
     homepage = "http://corsixth.com/";
     license = licenses.mit;
+    maintainers = with maintainers; [ trofi ];
     platforms = platforms.linux;
   };
 }

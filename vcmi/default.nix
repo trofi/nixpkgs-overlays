@@ -72,6 +72,7 @@ mkDerivation rec {
     description = "open-source engine for Heroes of Might and Magic III";
     homepage = "https://vcmi.eu/";
     license = licenses.gpl2;
+    maintainers = with maintainers; [ trofi ];
     platforms = platforms.linux;
   };
 }

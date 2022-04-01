@@ -32,6 +32,7 @@ python3.pkgs.buildPythonApplication rec {
     description = "Graph the results of a blktrace run";
     homepage = "https://github.com/trofi/seekwatcher";
     license = licenses.gpl2;
+    maintainers = with maintainers; [ trofi ];
     platforms = platforms.linux;
   };
 }

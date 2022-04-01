@@ -29,6 +29,7 @@ stdenv.mkDerivation rec {
     description = "Graph the results of a blktrace run";
     homepage = "http://masoncoding.com/iowatcher/";
     license = licenses.gpl2;
+    maintainers = with maintainers; [ trofi ];
     platforms = platforms.linux;
   };
 }

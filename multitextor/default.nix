@@ -37,6 +37,7 @@ stdenv.mkDerivation rec {
     description = "Multiplatform command line text editor.";
     homepage = "https://github.com/vikonix/multitextor";
     license = licenses.bsd2;
+    maintainers = with maintainers; [ trofi ];
     platforms = platforms.linux;
   };
 }

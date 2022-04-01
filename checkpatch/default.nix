@@ -32,6 +32,7 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Graph the results of a blktrace run";
     homepage = "http://www.alejandro-colomar.es/src/alx/linux/checkpatch.git/";
+    maintainers = with maintainers; [ trofi ];
     license = licenses.gpl2Plus;
     platforms = platforms.linux;
   };
