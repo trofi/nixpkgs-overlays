@@ -12,6 +12,7 @@
 
 , elfutils
 , libbfd
+, libiberty
 , ncurses
 
 , unstableGitUpdater
@@ -45,6 +46,7 @@ stdenv.mkDerivation rec {
   buildInputs = [
     elfutils
     libbfd
+    libiberty
     ncurses
   ];
 
