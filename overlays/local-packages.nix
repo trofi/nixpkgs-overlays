@@ -24,6 +24,8 @@ final: prev: {
 
   seekwatcher = final.callPackage ../seekwatcher {};
 
+  ski = final.callPackage ../ski {};
+
   vcmi = final.libsForQt5.callPackage ../vcmi {};
 
   xmms2 = final.callPackage ../xmms2 {};
