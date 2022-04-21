@@ -11,7 +11,9 @@
 , fetchFromGitHub
 , fetchurl
 , alsa-lib
+, avahi-compat
 , cunit
+, curl
 , faad2
 , flac
 , ffmpeg
@@ -26,9 +28,10 @@
 , libsndfile
 , libvorbis
 , python3Packages
-, perlPackages
+, perl
 , pkg-config
 , readline
+, ruby
 , speex
 , sqlite
 , wafHook, waf
@@ -53,7 +56,9 @@ stdenv.mkDerivation rec {
 
   buildInputs = [
     alsa-lib
+    avahi-compat
     cunit
+    curl
     faad2
     ffmpeg
     flac
@@ -71,6 +76,7 @@ stdenv.mkDerivation rec {
     #TODO: plugin path
     #perlPackages.perl
     pypkgs.python
+    ruby
     speex
     sqlite
     wavpack
@@ -80,7 +86,7 @@ stdenv.mkDerivation rec {
     pkg-config
     #TODO: plugin path
     #perlPackages.perl
-    perlPackages.PodParser
+    (perl.withPackages (ps: [ ps.PodParser ]))
     pypkgs.cython
     pypkgs.python
     wafHook
