@@ -73,8 +73,7 @@ stdenv.mkDerivation rec {
     libsndfile
     libvorbis
     readline
-    #TODO: plugin path
-    #perlPackages.perl
+    perl
     pypkgs.python
     ruby
     speex
@@ -84,12 +83,16 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     pkg-config
-    #TODO: plugin path
-    #perlPackages.perl
     (perl.withPackages (ps: [ ps.PodParser ]))
     pypkgs.cython
     pypkgs.python
     wafHook
+  ];
+
+  wafConfigureFlags = [
+    "--with-perl-archdir=${placeholder "out"}/lib/perl5/site_perl/${perl.version}"
+    "--with-ruby-archdir=${placeholder "out"}/lib/ruby/site_ruby/${ruby.version.libDir}/${stdenv.hostPlatform.system}"
+    "--with-ruby-libdir=${placeholder "out"}/lib/ruby/site_ruby/${ruby.version.libDir}/${stdenv.hostPlatform.system}"
   ];
 
   passthru = {
