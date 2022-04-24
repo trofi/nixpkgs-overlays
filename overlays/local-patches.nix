@@ -1,4 +1,9 @@
 final: prev: {
+  # https://github.com/NixOS/nixpkgs/pull/169907
+  binutils-unwrapped-all-targets = prev.binutils-unwrapped-all-targets.overrideAttrs(oa: {
+    postFixup = "";
+  });
+
   claws-mail = prev.claws-mail.overrideAttrs(oa: {
     patches = (oa.patches or []) ++ [
       ../claws-mail/show-all-text.patch
