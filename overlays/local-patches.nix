@@ -20,5 +20,8 @@ final: prev: {
     patches = (oa.patches or []) ++ [
       ../nix/0001-src-libstore-derivations.cc-avoid-istringstream-on-h.patch
     ];
+    dontStrip = true;
+    separateDebugInfo = false;
+    NIX_CFLAGS_COMPILE = "-ggdb3";
   });
 }
