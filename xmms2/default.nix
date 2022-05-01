@@ -1,5 +1,5 @@
 # TODO:
-# - sc68, not detected?
+# - sc68, not detected: no sc68-config
 # - libofa, do i need it?
 # - fftw?
 # - jack?
@@ -27,6 +27,7 @@
 , libpulseaudio
 , libsndfile
 , libvorbis
+, mpg123
 , python3Packages
 , perl
 , pkg-config
@@ -35,6 +36,7 @@
 , speex
 , sqlite
 , tremor
+, valgrind
 , wafHook, waf
 , wavpack
 }:
@@ -73,6 +75,7 @@ stdenv.mkDerivation rec {
     libpulseaudio
     libsndfile
     libvorbis
+    mpg123
     readline
     perl
     pypkgs.python
@@ -88,6 +91,7 @@ stdenv.mkDerivation rec {
     (perl.withPackages (ps: [ ps.PodParser ]))
     pypkgs.cython
     pypkgs.python
+    valgrind
     wafHook
   ];
 
