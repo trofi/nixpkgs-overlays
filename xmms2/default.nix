@@ -34,6 +34,7 @@
 , ruby
 , speex
 , sqlite
+, tremor
 , wafHook, waf
 , wavpack
 }:
@@ -78,6 +79,7 @@ stdenv.mkDerivation rec {
     ruby
     speex
     sqlite
+    tremor
     wavpack
   ];
 
