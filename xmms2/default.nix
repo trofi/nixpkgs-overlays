@@ -22,6 +22,7 @@
 , glib
 , libgme
 , libmad
+, libmms
 , libmodplug
 , libogg
 , libopus, opusfile
@@ -73,6 +74,7 @@ stdenv.mkDerivation rec {
     libogg
     libopus opusfile
     libmad
+    libmms
     libmodplug
     libpulseaudio
     libsndfile
