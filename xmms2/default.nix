@@ -24,6 +24,7 @@
 , libmad
 , libmms
 , libmodplug
+, libofa
 , libogg
 , libopus, opusfile
 , libpulseaudio
@@ -71,6 +72,7 @@ stdenv.mkDerivation rec {
     fluidsynth
     glib
     libgme
+    libofa
     libogg
     libopus opusfile
     libmad
