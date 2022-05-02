@@ -17,6 +17,7 @@
 , faad2
 , flac
 , ffmpeg
+, flex
 , fluidsynth
 , glib
 , libgme
@@ -89,6 +90,7 @@ stdenv.mkDerivation rec {
   ];
 
   nativeBuildInputs = [
+    flex
     pkg-config
     (perl.withPackages (ps: [ ps.PodParser ]))
     pypkgs.cython
