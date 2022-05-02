@@ -29,7 +29,7 @@
 , libopus, opusfile
 , libpulseaudio
 , libsndfile
-, libvisual
+, libvisual, SDL
 , libvorbis
 , mpg123
 , python3Packages
@@ -80,7 +80,7 @@ stdenv.mkDerivation rec {
     libmodplug
     libpulseaudio
     libsndfile
-    libvisual
+    libvisual SDL
     libvorbis
     mpg123
     readline
