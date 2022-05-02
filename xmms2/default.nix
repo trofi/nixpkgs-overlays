@@ -20,6 +20,7 @@
 , flex
 , fluidsynth
 , glib
+, libao
 , libgme
 , libmad
 , libmms
@@ -71,6 +72,7 @@ stdenv.mkDerivation rec {
     flac
     fluidsynth
     glib
+    libao
     libgme
     libofa
     libogg
