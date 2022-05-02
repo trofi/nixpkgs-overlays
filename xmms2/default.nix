@@ -44,6 +44,8 @@
 , valgrind
 , wafHook, waf
 , wavpack
+
+, xmms2
 }:
 
 let pypkgs = python3Packages;
@@ -51,13 +53,13 @@ in
 
 stdenv.mkDerivation rec {
   pname = "xmms2";
-  version = "0.9";
+  version = "0.9.1";
 
   src = fetchFromGitHub {
     owner = "XMMS2";
     repo = "xmms2-devel";
     rev = "${version}";
-    sha256 = "sha256-AZk03b4q5FFSCFdSS7utWSkEfjvWao3vk2MAhbA5+tk=";
+    sha256 = "sha256-2EIzjkYEMp5613fWYinu+hxycKsv4xFHisXgfsxGzLg=";
     fetchSubmodules = true;
   };
 
@@ -113,6 +115,14 @@ stdenv.mkDerivation rec {
   passthru = {
     # for client applications that use python bindings
     python = pypkgs.python;
+    tests = {
+        xmms2_release = xmms2.overrideAttrs (oa: {
+          src = fetchurl {
+            url = "https://github.com/xmms2/xmms2-devel/releases/download/${version}/xmms2-${version}.tar.bz2";
+            hash = "sha256-O52Zvl2+fSxDTEsnzXwcw8PddUSmc3BcPwZ0s0jrKKM=";
+          };
+        });
+    };
   };
 
   meta = with lib; {
