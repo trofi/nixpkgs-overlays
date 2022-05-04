@@ -16,6 +16,13 @@ final: prev: {
     ];
   });
 
+  liferea = prev.liferea.overrideAttrs(oa: {
+    src = let ver = "1.13.8"; in prev.fetchurl {
+      url = "https://github.com/lwindolf/liferea/releases/download/v${ver}/liferea-${ver}.tar.bz2";
+      sha256 = "sha256-EAiugFGSgWsZDwfGyOCUJWvFuIBi9drxpxAlC+0pSHQ=";
+    };
+  });
+
   nix = prev.nix.overrideAttrs(oa: {
     src = prev.fetchFromGitHub {
       owner = "NixOS";
