@@ -23,13 +23,7 @@ final: prev: {
     };
   });
 
-  nix = prev.nix.overrideAttrs(oa: {
-    src = prev.fetchFromGitHub {
-      owner = "NixOS";
-      repo = "nix";
-      rev = "470e27ce8008ba952225b9f9f7f61a9627376f33";
-      hash = "sha256-BpEL913l/DfDsXzlAcQbmUrKFT5QIxl2YzhOK/fSdH0=";
-    };
+  nixUnstable = prev.nixUnstable.overrideAttrs(oa: {
     patches = (oa.patches or []) ++ [
       ../nix/0001-src-libstore-derivations.cc-avoid-istringstream-on-h.patch
     ];
