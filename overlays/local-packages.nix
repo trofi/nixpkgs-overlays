@@ -14,6 +14,8 @@ final: prev: {
 
   corsix-th = final.callPackage ../corsix-th {};
 
+  dwarffs = final.callPackage ../dwarffs {};
+
   iowatcher = final.callPackage ../iowatcher {};
 
   multitextor = final.callPackage ../multitextor {};
