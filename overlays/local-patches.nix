@@ -26,6 +26,7 @@ final: prev: {
   nixUnstable = prev.nixUnstable.overrideAttrs(oa: {
     patches = (oa.patches or []) ++ [
       ../nix/0001-src-libstore-derivations.cc-avoid-istringstream-on-h.patch
+      ../nix/0001-src-libutil-json.cc-add-missing-cstdint-include-for-.patch
     ];
     dontStrip = true;
     separateDebugInfo = false;
