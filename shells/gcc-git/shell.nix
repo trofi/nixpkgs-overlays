@@ -25,7 +25,7 @@ pkgs.mkShell {
     mkdir -p __td__
     ln -vsf ${pkgs.lib.getDev pkgs.stdenv.cc.libc}/include __td__/include
     ln -vsf ${pkgs.stdenv.cc.libc}/lib __td__/lib
-    ln -vsf . __td__/x86_64-pc-linux-gnu
+    ln -vsf . __td__/${pkgs.stdenv.hostPlatform.config}
 
     cfg() {
        COMMON_FLAGS=(
@@ -35,6 +35,10 @@ pkgs.mkShell {
          -ggdb3
        )
        args=(
+         --build=${pkgs.stdenv.buildPlatform.config}
+         --host=${pkgs.stdenv.hostPlatform.config}
+         --target=${pkgs.stdenv.targetPlatform.config}
+
          # enabled by default, NixOS has no multilib binaries
          --disable-multilib
 
