@@ -12,13 +12,13 @@
 
 stdenv.mkDerivation rec {
   pname = "dwarffs";
-  version = "unstable-2022-03-06";
+  version = "unstable-2022-06-25";
 
   src = fetchFromGitHub {
     owner = "edolstra";
     repo = "dwarffs";
-    rev = "e768ce3239156de05f7ff3210d86a80762730f30";
-    sha256 = "sha256-VYJFoEigK0DASnBiYUhQBe0c0O4mlcoGBlYN8qs2TOo=";
+    rev = "b439f87e614ad4664e57eea29afac337c9a4839f";
+    sha256 = "sha256-kq5dejftKMkHMBhwyocis9wZrkdCIZUFm2IfO6KLYjU=";
   };
 
   buildInputs = [ fuse nix nlohmann_json boost ];
