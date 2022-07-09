@@ -15,6 +15,7 @@ pkgs.mkShell {
 
     # test harness
     dejagnu
+    autogen
   ];
 
   # TODO: why? libgcc.so breakage?
@@ -25,14 +26,21 @@ pkgs.mkShell {
     mkdir -p __td__
     ln -vsf ${pkgs.lib.getDev pkgs.stdenv.cc.libc}/include __td__/include
     ln -vsf ${pkgs.stdenv.cc.libc}/lib __td__/lib
+    # for --bootstrap
+    ln -vsf ${pkgs.stdenv.cc.libc}/lib __td__/bin
     ln -vsf . __td__/${pkgs.stdenv.hostPlatform.config}
+
+    cat >__td__/local.spec <<-EOF
+    *link:
+    + %{!shared:%{!static:%{!static-pie:-dynamic-linker ${pkgs.musl}/lib/ld-musl-x86_64.so.1}}}
+    EOF
 
     cfg() {
        COMMON_FLAGS=(
          # speed up build
          -O1
          # detailed debugging
-         -ggdb3
+         -g0
        )
        args=(
          --build=${pkgs.stdenv.buildPlatform.config}
@@ -45,7 +53,16 @@ pkgs.mkShell {
          # avoid intermediate rebuild, does not work without crt
          --disable-bootstrap
 
+         --with-specs="-specs=$PWD/__td__/local.spec"
+
          --with-native-system-header-dir=${pkgs.lib.getDev pkgs.stdenv.cc.libc}/include
+
+         --with-gmp-include=${pkgs.gmp.dev}/include
+         --with-gmp-lib=${pkgs.gmp.out}/lib
+         --with-mpfr-include=${pkgs.mpfr.dev}/include
+         --with-mpfr-lib=${pkgs.mpfr.out}/lib
+         --with-mpc=${pkgs.libmpc}
+
          --prefix=''${PWD}/__td__
 
          # -O1 to speed up build
@@ -54,7 +71,7 @@ pkgs.mkShell {
          CXXFLAGS="''${COMMON_FLAGS[*]}"
          LDFLAGS="''${COMMON_FLAGS[*]}"
        )
-       ~/dev/git/gcc/configure "''${args[@]}"
+       ~/dev/git/gcc/configure "''${args[@]}" "$@"
     }
   '';
 }
