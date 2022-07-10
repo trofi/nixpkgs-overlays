@@ -27,7 +27,7 @@ mkDerivation rec {
     owner = "vcmi";
     repo = "vcmi";
     rev = "b8b330668d00ec297ad929caf1798559d67120bd";
-    sha256 = "sha256-U7kg0MjQ4hDEkntF4hlb4TyKWHaAxRQPrCLTvTSoI8k=";
+    sha256 = "sha256-GZBF1naUX1JqON+GOwXpjWUYwnoRgS4kFqNlcF1nCxs=";
     fetchSubmodules = true;
   };
 
