@@ -1,0 +1,70 @@
+From 2f5c5d63d68bd741625f20b7a0499758081adef5 Mon Sep 17 00:00:00 2001
+From: Sergei Trofimovich <slyich@gmail.com>
+Date: Sat, 13 Aug 2022 10:25:40 +0100
+Subject: [PATCH] src/engine/system.cpp: speed up resolution of unmodified
+ paths on unix
+
+Without the change `fheroes2` can start on NixOS for a few minutes.
+It happens due to suboptimal interaction of NixOS flat directory layout:
+
+    /nix/store/...-fheroes2-${ver}/share/fheroes2/files/lang
+    /nix/store/...-other-package-1/...
+    /nix/store/...-other-package-2/...
+    ...
+    /nix/store/...-other-package-10000/...
+
+and of `bool System::GetCaseInsensitivePath(path, correctedPath)` function.
+When `System::GetCaseInsensitivePath("/nix/store/...-fheroes2-${ver}/share/fheroes2/files/lang", out);`
+is called `/nix/store` is fully expanded first to the list of file to look
+up `...-fheroes2-${ver}` entry in a case insensitive manner.
+
+My system happens to have 400_000 `/nix/store` entries and it takes tens
+of seconds to match a file there.
+
+The change adds an optimisitic direct entry lookup to avoid linear
+directory scan.
+---
+ src/engine/system.cpp | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+
+diff --git a/src/engine/system.cpp b/src/engine/system.cpp
+index d5aff19a..c47f6f13 100644
+--- a/src/engine/system.cpp
++++ b/src/engine/system.cpp
+@@ -401,6 +401,33 @@ bool System::GetCaseInsensitivePath( const std::string & path, std::string & cor
+ 
+         correctedPath.append( delimiter );
+ 
++        {
++            // Avoid directory traversal and try to probe directory name directly.
++            // Speeds up file lookup when intermediate directories have a lot of
++            // files. Example is NixOS where file layout is:
++            //     /nix/store/...-fheroes2-${ver}/share/fheroes2/files/lang
++            //     /nix/store/...-other-package-1/...
++            //     /nix/store/...-other-package-2/...
++            // It's not uncommon for /nix/store to have tens of thousands files.
++            // GetCaseInsensitivePath() calls become very expensive on such systems.
++            //
++            // The idea is to try to open current subpath as a directory an avoid
++            // directory traversal altogether. Otherwise fall back to linear
++            // case-insensitive search.
++
++            std::string absSubpath = correctedPath + *subPathIter;
++            DIR * de = opendir( absSubpath.c_str() );
++            if ( de ) {
++                correctedPath += *subPathIter;
++
++                closedir( d );
++                d = opendir( correctedPath.c_str() );
++
++                closedir( de );
++                continue;
++            }
++        }
++
+         const struct dirent * e = readdir( d );
+         while ( e ) {
+             if ( strcasecmp( ( *subPathIter ).c_str(), e->d_name ) == 0 ) {
+-- 
+2.37.1
+
