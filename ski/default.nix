@@ -15,6 +15,8 @@
 , libiberty
 , ncurses
 
+, withX11 ? true, motif, xorg
+
 , unstableGitUpdater
 }:
 
@@ -48,6 +50,19 @@ stdenv.mkDerivation rec {
     libbfd
     libiberty
     ncurses
+  ] ++ lib.optionals withX11 [
+    motif
+    xorg.libX11
+    xorg.libXt
+    xorg.libXext
+  ];
+
+  configureFlags = lib.optionals withX11 [
+    "--with-x11"
+  ];
+
+  makeFlags = [
+    "appdefaultsdir=${placeholder "out"}/etc/X11/app-defaults"
   ];
 
   # Update as:
