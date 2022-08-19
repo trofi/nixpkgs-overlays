@@ -16,13 +16,6 @@ final: prev: {
     ];
   });
 
-  fheroes2 = prev.fheroes2.overrideAttrs(oa: {
-    patches = (oa.patches or []) ++ [
-      ../fheroes2/0001-src-engine-system.cpp-speed-up-resolution-of-unmodif.patch
-    ];
-  });
-
-
   liferea = prev.liferea.overrideAttrs(oa: {
     src = let ver = "1.13.8"; in prev.fetchurl {
       url = "https://github.com/lwindolf/liferea/releases/download/v${ver}/liferea-${ver}.tar.bz2";
