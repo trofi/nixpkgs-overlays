@@ -16,6 +16,7 @@
 , ncurses
 
 , withX11 ? true, motif, xorg
+, withGtk ? true, gnome2
 
 , unstableGitUpdater
 }:
@@ -55,10 +56,16 @@ stdenv.mkDerivation rec {
     xorg.libX11
     xorg.libXt
     xorg.libXext
-  ];
+  ] ++ lib.optionals withGtk [
+    gnome2.libglade
+    gnome2.libgnomeui
+  ]
+  ;
 
   configureFlags = lib.optionals withX11 [
     "--with-x11"
+  ] ++ lib.optionals withGtk [
+    "--with-gtk"
   ];
 
   makeFlags = [
