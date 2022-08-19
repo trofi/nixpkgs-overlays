@@ -25,8 +25,8 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "trofi";
     repo = "ski";
-    rev = "8d5593540453cec0259b5874907dd23126b5d06b";
-    sha256 = "sha256-wCWu4gu0t1Y1aVcC4N1wkEzqjG6E6w7dawou2wa7YS4=";
+    rev = "9bdd82db79183bf4d168cbe7874c3b37d2baf019";
+    sha256 = "sha256-5d0RwglhJT4hJel7YvUHXxajNxm9W7fIJYpZ2CW5ApI=";
   };
 
   postPatch = ''
