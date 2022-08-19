@@ -19,6 +19,7 @@
 , withGtk ? true, gnome2
 
 , unstableGitUpdater
+, ski
 }:
 
 stdenv.mkDerivation rec {
@@ -74,8 +75,13 @@ stdenv.mkDerivation rec {
 
   # Update as:
   #    nix-shell ./maintainers/scripts/update.nix --argstr package ski --arg include-overlays true
-  passthru.updateScript = unstableGitUpdater {
-    url = "https://github.com/trofi/ski.git";
+  passthru = {
+    updateScript = unstableGitUpdater {
+      url = "https://github.com/trofi/ski.git";
+    };
+    tests = {
+      noGui = ski.override { withX11 = false; withGtk = false; };
+    };
   };
 
   meta = with lib; {
