@@ -29,6 +29,7 @@
       pkgs.xz
     ];
     shellHook = ''
-      mkj() { make -j$(nproc); }
+      mkj() { make -j$(nproc) "$@"; }
+      acm() { ./autogen.sh && ./configure && make; }
     '';
   }
