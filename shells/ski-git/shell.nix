@@ -30,6 +30,6 @@
     ];
     shellHook = ''
       mkj() { make -j$(nproc) "$@"; }
-      acm() { ./autogen.sh && ./configure && mkj; }
+      acm() { ./autogen.sh && ./configure --with-x11 --with-gtk "$@" && mkj; }
     '';
   }
