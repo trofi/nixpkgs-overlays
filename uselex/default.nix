@@ -1,7 +1,9 @@
 { lib
 , stdenv
 , fetchFromGitHub
+
 , ruby_3_1
+, binutils-unwrapped-all-targets
 
 , unstableGitUpdater
 }:
@@ -21,6 +23,8 @@ stdenv.mkDerivation rec {
 
   postPatch = ''
     patchShebangs
+
+    substituteInPlace uselex.rb --replace "'nm'" "'${binutils-unwrapped-all-targets}/bin/nm'"
   '';
 
   installPhase = ''
