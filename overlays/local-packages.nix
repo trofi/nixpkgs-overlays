@@ -24,6 +24,8 @@ final: prev: {
 
   ski = final.callPackage ../ski {};
 
+  uselex = final.callPackage ../uselex {};
+
   vcmi = final.libsForQt5.callPackage ../vcmi {};
 
   xmms2 = final.callPackage ../xmms2 {};
