@@ -17,6 +17,7 @@
 
       # maintainer tools
       autoconf
+      autoconf-archive
       automake
       bison
       flex
@@ -30,6 +31,6 @@
     ];
     shellHook = ''
       mkj() { make -j$(nproc) "$@"; }
-      acm() { ./autogen.sh && ./configure --with-x11 --with-gtk "$@" && mkj; }
+      acm() { ./autogen.sh && ./configure --with-x11 --with-gtk --enable-werror "$@" && mkj; }
     '';
   }
