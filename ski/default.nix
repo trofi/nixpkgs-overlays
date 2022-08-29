@@ -3,6 +3,7 @@
 , fetchFromGitHub
 
 , autoconf
+, autoconf-archive
 , automake
 , bison
 , flex
@@ -39,6 +40,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     autoconf
+    autoconf-archive
     automake
     bison
     flex
