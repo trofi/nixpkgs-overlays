@@ -38,8 +38,8 @@ stdenv.mkDerivation rec {
     luaEnv
   ];
 
-  luaEnvPath = lua.pkgs.luaLib.genLuaPathAbsStr luaEnv;
-  luaEnvCPath = lua.pkgs.luaLib.genLuaCPathAbsStr luaEnv;
+  luaEnvPath = (lua.pkgs.luaLib or lua.pkgs.lib).genLuaPathAbsStr luaEnv;
+  luaEnvCPath = (lua.pkgs.luaLib or lua.pkgs.lib).genLuaCPathAbsStr luaEnv;
 
   # the wrapping should go away once lua hook is fixed
   postInstall = ''
