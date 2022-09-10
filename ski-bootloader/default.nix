@@ -11,7 +11,7 @@ stdenv.mkDerivation rec {
 
   src = ski.src;
 
-  sourceRoot = "ski-bootloader";
+  sourceRoot = "source/ski-bootloader";
 
   installPhase = ''
     runHook preInstall
