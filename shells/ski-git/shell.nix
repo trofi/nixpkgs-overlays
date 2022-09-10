@@ -6,8 +6,8 @@
       libbfd
       libiberty
       ncurses
-      motif
       ## x11
+      motif
       xorg.libX11
       xorg.libXt
       xorg.libXext
@@ -22,7 +22,6 @@
       bison
       flex
       gperf
-      libtool
       pkg-config
 
       # for release tarballs
