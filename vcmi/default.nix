@@ -21,17 +21,15 @@
 
 mkDerivation rec {
   pname = "vcmi";
-  version = "unstable-2022-08-24";
+  version = "unstable-2022-09-04";
 
   src = fetchFromGitHub {
     owner = "vcmi";
     repo = "vcmi";
-    rev = "92dc902748372fa1743ff24d4597b0b7b4c5c380";
-    sha256 = "sha256-bjVTcLGq9/GnsnLkTDfodAhp2mPoHm/w329GYuJ81Zg=";
+    rev = "5862c192b0c0c3cb2a42bfd25482b587693ccc4b";
+    sha256 = "sha256-YolU74v3mFiFbZ7QzcxTqXrfK183p6Lc49lETPUE3v8=";
     fetchSubmodules = true;
   };
-
-  patches = [ ./vcmi-SDL2.patch ];
 
   nativeBuildInputs = [ cmake ];
   buildInputs = [
