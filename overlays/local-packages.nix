@@ -23,6 +23,7 @@ final: prev: {
   seekwatcher = final.callPackage ../seekwatcher {};
 
   ski = final.callPackage ../ski {};
+  ski-bootloader = final.callPackage ../ski-bootloader {};
 
   uselex = final.callPackage ../uselex {};
 
