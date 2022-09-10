@@ -21,13 +21,13 @@
 
 mkDerivation rec {
   pname = "vcmi";
-  version = "unstable-2022-09-04";
+  version = "unstable-2022-09-10";
 
   src = fetchFromGitHub {
     owner = "vcmi";
     repo = "vcmi";
-    rev = "5862c192b0c0c3cb2a42bfd25482b587693ccc4b";
-    sha256 = "sha256-YolU74v3mFiFbZ7QzcxTqXrfK183p6Lc49lETPUE3v8=";
+    rev = "205bb0988086d03c96c5951b88362d6364207e7e";
+    sha256 = "sha256-qSCiZ+uSQgEIsGTa+XMYGYh0w9nyipQQMBdtSvN1sHU=";
     fetchSubmodules = true;
   };
 
