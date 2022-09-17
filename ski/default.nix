@@ -16,7 +16,6 @@
 , libiberty
 , ncurses
 
-, withX11 ? true, motif, xorg
 , withGtk ? true, gnome2
 
 , unstableGitUpdater
@@ -25,13 +24,13 @@
 
 stdenv.mkDerivation rec {
   pname = "ski";
-  version = "unstable-2022-09-10";
+  version = "unstable-2022-09-17";
 
   src = fetchFromGitHub {
     owner = "trofi";
     repo = "ski";
-    rev = "5ce3ce5a754762dee1609fc11e9dd3e7901df45c";
-    sha256 = "sha256-KtaXMcJnWFa6tqqFV4kaxTP3Aw0ymzWtviSSt6uelA8=";
+    rev = "e0d7f5c1d2a94dc03c402c7e25a940e75306afd0";
+    sha256 = "sha256-kPoeVnxIo7VG5MdUULQIQXftjmbRfzf9oSUGXqNdymE=";
   };
 
   postPatch = ''
@@ -54,20 +53,13 @@ stdenv.mkDerivation rec {
     libbfd
     libiberty
     ncurses
-  ] ++ lib.optionals withX11 [
-    motif
-    xorg.libX11
-    xorg.libXt
-    xorg.libXext
   ] ++ lib.optionals withGtk [
     gnome2.libglade
     gnome2.libgnomeui
   ]
   ;
 
-  configureFlags = lib.optionals withX11 [
-    "--with-x11"
-  ] ++ lib.optionals withGtk [
+  configureFlags = lib.optionals withGtk [
     "--with-gtk"
   ];
 
@@ -82,7 +74,7 @@ stdenv.mkDerivation rec {
       url = "https://github.com/trofi/ski.git";
     };
     tests = {
-      noGui = ski.override { withX11 = false; withGtk = false; };
+      noGui = ski.override { withGtk = false; };
     };
   };
 
