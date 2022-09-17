@@ -6,11 +6,6 @@
       libbfd
       libiberty
       ncurses
-      ## x11
-      motif
-      xorg.libX11
-      xorg.libXt
-      xorg.libXext
       ## gtk
       gnome2.libglade
       gnome2.libgnomeui
@@ -30,6 +25,6 @@
     ];
     shellHook = ''
       mkj() { make -j$(nproc) "$@"; }
-      acm() { ./autogen.sh && ./configure --with-x11 --with-gtk --enable-werror "$@" && mkj; }
+      acm() { ./autogen.sh && ./configure --with-gtk --enable-werror "$@" && mkj; }
     '';
   }
