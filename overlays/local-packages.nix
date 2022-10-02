@@ -16,8 +16,6 @@ final: prev: {
 
   dwarffs = final.callPackage ../dwarffs {};
 
-  hid-tools = final.callPackage ../hid-tools {};
-
   iowatcher = final.callPackage ../iowatcher {};
 
   multitextor = final.callPackage ../multitextor {};
