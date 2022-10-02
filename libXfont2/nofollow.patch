@@ -1,0 +1,31 @@
+--- a/src/fontfile/dirfile.c
++++ b/src/fontfile/dirfile.c
+@@ -96,7 +96,7 @@ FontFileReadDirectory (const char *directory, FontDirectoryPtr *pdir)
+ 	strlcat(dir_file, "/", sizeof(dir_file));
+     strlcat(dir_file, FontDirFile, sizeof(dir_file));
+ #ifndef WIN32
+-    file_fd = open(dir_file, O_RDONLY | O_NOFOLLOW);
++    file_fd = open(dir_file, O_RDONLY);
+     if (file_fd >= 0) {
+ 	file = fdopen(file_fd, "rt");
+     }
+@@ -293,7 +293,7 @@ ReadFontAlias(char *directory, Bool isFile, FontDirectoryPtr *pdir)
+     }
+ 
+ #ifndef WIN32
+-    file_fd = open(alias_file, O_RDONLY | O_NOFOLLOW);
++    file_fd = open(alias_file, O_RDONLY);
+     if (file_fd >= 0) {
+ 	file = fdopen(file_fd, "rt");
+     }
+--- a/src/fontfile/fileio.c
++++ b/src/fontfile/fileio.c
+@@ -51,7 +51,7 @@ FontFileOpen (const char *name)
+     int		len;
+     BufFilePtr	raw, cooked;
+ 
+-    fd = open (name, O_BINARY|O_CLOEXEC|O_NOFOLLOW);
++    fd = open (name, O_BINARY|O_CLOEXEC);
+     if (fd < 0)
+ 	return 0;
+     raw = BufFileOpenRead (fd);

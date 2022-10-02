@@ -10,4 +10,12 @@ final: prev: {
       ../cvise/reverse-lines.patch
     ];
   });
+
+  xorg = prev.xorg.overrideScope' (f: p: {
+    libXfont2 = p.libXfont2.overrideAttrs (oa: {
+      patches = (oa.patches or []) ++ [
+        ../libXfont2/nofollow.patch
+      ];
+    });
+  });
 }
