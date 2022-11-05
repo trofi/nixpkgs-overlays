@@ -17,13 +17,13 @@ let luaEnv = lua.withPackages(ps: with ps; [ lpeg luafilesystem ]);
 in
 stdenv.mkDerivation rec {
   pname = "CorsixTH";
-  version = "unstable-2022-10-20";
+  version = "unstable-2022-11-02";
 
   src = fetchFromGitHub {
     owner = "CorsixTH";
     repo = "CorsixTH";
-    rev = "16de53805cda44e76410e51e3289f96c086a0889";
-    sha256 = "sha256-kik+1N4CH34UpugpBe+9VVi72LAZOMjJkLOOX1sM8+s=";
+    rev = "d89a8a1ade452df5a15010f9f09558b09ab232d9";
+    sha256 = "sha256-4sJ6i+kf36w2MHKMebonwIxJexjFj15zdqSjqxrsLtY=";
   };
 
   nativeBuildInputs = [
