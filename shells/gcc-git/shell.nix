@@ -53,6 +53,9 @@ pkgs.mkShell {
          # avoid intermediate rebuild, does not work without crt
          --disable-bootstrap
 
+         # avoid libxcrypt depend
+         --disable-libsanitizer
+
          --with-specs="-specs=$PWD/__td__/local.spec"
 
          --with-native-system-header-dir=${pkgs.lib.getDev pkgs.stdenv.cc.libc}/include
