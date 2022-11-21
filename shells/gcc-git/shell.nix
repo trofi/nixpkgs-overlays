@@ -16,6 +16,9 @@ pkgs.mkShell {
     # test harness
     dejagnu
     autogen
+
+    # valgrind annotations
+    valgrind
   ];
 
   # TODO: why? libgcc.so breakage?
@@ -55,6 +58,11 @@ pkgs.mkShell {
 
          # avoid libxcrypt depend
          --disable-libsanitizer
+
+         --enable-languages=c,c++
+
+         # disable valgrind warnings
+         --enable-valgrind-annotations
 
          --with-specs="-specs=$PWD/__td__/local.spec"
 
