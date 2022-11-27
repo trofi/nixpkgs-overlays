@@ -1,0 +1,25 @@
+--- a/dlls/winewayland.drv/gbm.c
++++ b/dlls/winewayland.drv/gbm.c
+@@ -286,13 +286,20 @@ struct gbm_surface *wayland_gbm_create_surface(uint32_t drm_format, int width, i
+ 
+     if (count_modifiers)
+     {
++        errno = 0;
++        struct gbm_surface * s =
+ #ifdef HAVE_GBM_SURFACE_CREATE_WITH_MODIFIERS2
+-        return gbm_surface_create_with_modifiers2(process_gbm_device, width, height,
++               gbm_surface_create_with_modifiers2(process_gbm_device, width, height,
+                                                   drm_format, modifiers, count_modifiers, gbm_bo_flags);
+ #else
+-        return gbm_surface_create_with_modifiers(process_gbm_device, width, height,
++               gbm_surface_create_with_modifiers(process_gbm_device, width, height,
+                                                  drm_format, modifiers, count_modifiers);
+ #endif
++        if (!s && errno == ENOSYS) {
++            TRACE("    => mesa can't create a surface with modifiers. Falling mack to modifer-less.");
++        } else {
++            return s;
++        }
+     }
+ 
+     return gbm_surface_create(process_gbm_device, width, height, drm_format, gbm_bo_flags);

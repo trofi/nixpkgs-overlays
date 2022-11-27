@@ -27,4 +27,10 @@ final: prev: {
       ];
     });
   };
+
+  wine-wayland = prev.wine-wayland.overrideAttrs (oa: {
+    patches = (oa.patches or []) ++ [
+      ../wine-wayland/wine-wayland-modifierless.patch
+    ];
+  });
 }
