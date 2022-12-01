@@ -1,24 +1,54 @@
 --- a/dlls/winewayland.drv/gbm.c
 +++ b/dlls/winewayland.drv/gbm.c
-@@ -286,13 +286,20 @@ struct gbm_surface *wayland_gbm_create_surface(uint32_t drm_format, int width, i
+@@ -29,6 +29,7 @@
+ 
+ #include <assert.h>
+ #include <errno.h>
++#include <drm_fourcc.h>
+ #include <fcntl.h>
+ #ifdef HAVE_LIBUDEV_H
+ #include <libudev.h>
+@@ -269,11 +270,10 @@ struct gbm_surface *wayland_gbm_create_surface(uint32_t drm_format, int width, i
+                                                BOOL format_is_scanoutable)
+ {
+     uint32_t gbm_bo_flags = GBM_BO_USE_RENDERING;
++    size_t i;
+ 
+     if (TRACE_ON(waylanddrv))
+     {
+-        size_t i;
+-
+         TRACE("%dx%d %.4s scanout=%d count_mods=%zu\n",
+               width, height, (const char *)&drm_format,
+               format_is_scanoutable, count_modifiers);
+@@ -286,13 +286,29 @@ struct gbm_surface *wayland_gbm_create_surface(uint32_t drm_format, int width, i
  
      if (count_modifiers)
      {
-+        errno = 0;
-+        struct gbm_surface * s =
++        struct gbm_surface *surf;
++
  #ifdef HAVE_GBM_SURFACE_CREATE_WITH_MODIFIERS2
 -        return gbm_surface_create_with_modifiers2(process_gbm_device, width, height,
-+               gbm_surface_create_with_modifiers2(process_gbm_device, width, height,
++        surf = gbm_surface_create_with_modifiers2(process_gbm_device, width, height,
                                                    drm_format, modifiers, count_modifiers, gbm_bo_flags);
  #else
 -        return gbm_surface_create_with_modifiers(process_gbm_device, width, height,
-+               gbm_surface_create_with_modifiers(process_gbm_device, width, height,
++        surf = gbm_surface_create_with_modifiers(process_gbm_device, width, height,
                                                   drm_format, modifiers, count_modifiers);
  #endif
-+        if (!s && errno == ENOSYS) {
-+            TRACE("    => mesa can't create a surface with modifiers. Falling mack to modifer-less.");
-+        } else {
-+            return s;
++        if (surf) return surf;
++
++        TRACE("Failed to create gbm surface with explicit modifiers API " \
++              "(errno=%d), falling back to implicit modifiers API\n", errno);
++
++        for (i = 0; i < count_modifiers; i++)
++            if (modifiers[i] == DRM_FORMAT_MOD_INVALID) break;
++
++        if (i == count_modifiers)
++        {
++            ERR("Will not create gbm surface with implicit modifiers API, as " \
++                "that is not supported by the compositor\n");
++            return NULL;
 +        }
      }
  
