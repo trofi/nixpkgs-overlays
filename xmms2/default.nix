@@ -46,6 +46,8 @@
 , wavpack
 
 , xmms2
+
+, unstableGitUpdater
 }:
 
 let pypkgs = python3Packages;
@@ -53,12 +55,12 @@ in
 
 stdenv.mkDerivation rec {
   pname = "xmms2";
-  version = "0.9.1";
+  version = "unstable-2022-12-30";
 
   src = fetchFromGitHub {
     owner = "XMMS2";
     repo = "xmms2-devel";
-    rev = "${version}";
+    rev = "1fa27db998f619e2a68278ff23761309768e8ed6";
     sha256 = "sha256-2EIzjkYEMp5613fWYinu+hxycKsv4xFHisXgfsxGzLg=";
     fetchSubmodules = true;
   };
@@ -113,6 +115,10 @@ stdenv.mkDerivation rec {
   ];
 
   passthru = {
+    updateScript = unstableGitUpdater {
+      url = "https://github.com/XMMS2/xmms2-devel.git";
+    };
+
     # for client applications that use python bindings
     python = pypkgs.python;
     tests = {
