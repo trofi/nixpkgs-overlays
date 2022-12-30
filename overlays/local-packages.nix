@@ -28,4 +28,5 @@ final: prev: {
   uselex = final.callPackage ../uselex {};
 
   xmms2 = final.callPackage ../xmms2 {};
+  xmms2_0_8 = final.callPackage ../xmms2/0.8 {};
 }
