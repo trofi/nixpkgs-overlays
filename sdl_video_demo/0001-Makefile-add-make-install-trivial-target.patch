@@ -1,0 +1,58 @@
+From 29397fd783e89736c67f92b2b42a80aafaac6e2b Mon Sep 17 00:00:00 2001
+From: Sergei Trofimovich <slyich@gmail.com>
+Date: Sun, 15 Jan 2023 10:15:50 +0000
+Subject: [PATCH] Makefile: add 'make install' trivial target
+
+While at it added missing 'sdl' input. In nixpkgs SDL and SDL-gfx get
+installed into different --prefix= paths. As a result SDL.h does not
+get located:
+
+    ...SDL_gfx-2.0.26/include/SDL/SDL_rotozoom.h:44:10:
+        fatal error: SDL.h: No such file or directory
+---
+ Makefile | 18 +++++++++++++++---
+ 1 file changed, 15 insertions(+), 3 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 6f2eb97..ada6e25 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,16 +1,24 @@
+ # Copyright (c) 2022 Sebastian Pipping <sebastian@pipping.org>
+ # Licensed under GPL v3 or later
+ 
++PREFIX = /usr/local
++BINDIR = $(DESTDIR)$(PREFIX)/bin
++INSTALL = install
++
+ CFLAGS += -Wall -Wextra -std=c99 -pedantic
+ 
+-SDL1_CFLAGS := $(shell pkg-config SDL_gfx --cflags)
+-SDL1_LDFLAGS := $(shell pkg-config SDL_gfx --libs)
++SDL1_CFLAGS := $(shell pkg-config sdl SDL_gfx --cflags)
++SDL1_LDFLAGS := $(shell pkg-config sdl SDL_gfx --libs)
+ 
+ SDL2_CFLAGS := $(shell sdl2-config --cflags)
+ SDL2_LDFLAGS := $(shell sdl2-config --libs)
+ 
++ALL_APPS = \
++	sdl1_video_demo \
++	sdl2_video_demo
++
+ .PHONY: all
+-all: sdl1_video_demo sdl2_video_demo
++all: $(ALL_APPS)
+ 
+ .PHONY: clean
+ clean:
+@@ -21,3 +29,7 @@ sdl1_video_demo: sdl1_video_demo.c
+ 
+ sdl2_video_demo: sdl2_video_demo.c
+ 	$(CC) $< -o $@ $(SDL2_CFLAGS) $(CFLAGS) $(SDL2_LDFLAGS) $(LDFLAGS)
++
++install: $(ALL_APPS)
++	$(INSTALL) -d $(BINDIR)
++	$(INSTALL) -m 0755 -t $(BINDIR) $(ALL_APPS)
+-- 
+2.38.1
+
