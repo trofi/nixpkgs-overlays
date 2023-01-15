@@ -12,6 +12,8 @@ final: prev: {
     };
   };
 
+  audio_pump_demo = final.callPackage ../audio_pump_demo {};
+
   corsix-th = final.callPackage ../corsix-th {};
 
   dwarffs = final.callPackage ../dwarffs {};

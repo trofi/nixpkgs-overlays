@@ -1,0 +1,29 @@
+commit 7935e6844dbb2bec669af4a319d0e346d09eeb3c
+Author: Sergei Trofimovich <slyich@gmail.com>
+Date:   Sun Jan 15 09:18:49 2023 +0000
+
+    makefile: add trivial 'make install' target
+
+diff --git a/Makefile b/Makefile
+index fea87c0..604dbe6 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,6 +1,10 @@
+ # Copyright (c) 2023 Sebastian Pipping <sebastian@pipping.org>
+ # Licensed under GPL v3 or later
+ 
++PREFIX = /usr/local
++BINDIR = $(DESTDIR)$(PREFIX)/bin
++INSTALL = install
++
+ CFLAGS += -Wall -Wextra -std=c99 -pedantic
+ 
+ PULSE_CFLAGS := $(shell pkg-config --cflags libpulse)
+@@ -32,3 +36,7 @@ pulseaudio_simple_pump_demo: pulseaudio_simple_pump_demo.c
+ 
+ sdl2_audio_pump_demo: sdl2_audio_pump_demo.c
+ 	$(CC) $< -o $@ $(SDL2_CFLAGS) $(CFLAGS) $(SDL2_LDFLAGS) $(LDFLAGS)
++
++install: $(ALL_APPS)
++	$(INSTALL) -d $(BINDIR)
++	$(INSTALL) -m 0755 -t $(BINDIR) $(ALL_APPS)
