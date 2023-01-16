@@ -24,7 +24,7 @@ stdenv.mkDerivation rec {
   patches = [ ./0001-Makefile-add-make-install-trivial-target.patch ];
 
   nativeBuildInputs = [ pkg-config ];
-  buildInputs = [ SDL SDL_gfx SDL2 ];
+  buildInputs = [ SDL_gfx SDL2 ];
 
   makeFlagsArray = [ "PREFIX=${placeholder "out"}" ];
   enableParallelBuilding = true;

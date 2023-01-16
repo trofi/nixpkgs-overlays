@@ -1,4 +1,4 @@
-From 29397fd783e89736c67f92b2b42a80aafaac6e2b Mon Sep 17 00:00:00 2001
+From 152c4a81a859f3d17082d11285c7f254f2f8d96e Mon Sep 17 00:00:00 2001
 From: Sergei Trofimovich <slyich@gmail.com>
 Date: Sun, 15 Jan 2023 10:15:50 +0000
 Subject: [PATCH] Makefile: add 'make install' trivial target
@@ -10,28 +10,25 @@ get located:
     ...SDL_gfx-2.0.26/include/SDL/SDL_rotozoom.h:44:10:
         fatal error: SDL.h: No such file or directory
 ---
- Makefile | 18 +++++++++++++++---
- 1 file changed, 15 insertions(+), 3 deletions(-)
+ Makefile | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
 
 diff --git a/Makefile b/Makefile
-index 6f2eb97..ada6e25 100644
+index 6f2eb97..0d549e2 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -1,16 +1,24 @@
+@@ -1,6 +1,10 @@
  # Copyright (c) 2022 Sebastian Pipping <sebastian@pipping.org>
  # Licensed under GPL v3 or later
  
 +PREFIX = /usr/local
-+BINDIR = $(DESTDIR)$(PREFIX)/bin
++BINDIR = $(PREFIX)/bin
 +INSTALL = install
 +
  CFLAGS += -Wall -Wextra -std=c99 -pedantic
  
--SDL1_CFLAGS := $(shell pkg-config SDL_gfx --cflags)
--SDL1_LDFLAGS := $(shell pkg-config SDL_gfx --libs)
-+SDL1_CFLAGS := $(shell pkg-config sdl SDL_gfx --cflags)
-+SDL1_LDFLAGS := $(shell pkg-config sdl SDL_gfx --libs)
- 
+ SDL1_CFLAGS := $(shell pkg-config SDL_gfx --cflags)
+@@ -9,8 +13,12 @@ SDL1_LDFLAGS := $(shell pkg-config SDL_gfx --libs)
  SDL2_CFLAGS := $(shell sdl2-config --cflags)
  SDL2_LDFLAGS := $(shell sdl2-config --libs)
  
@@ -45,14 +42,15 @@ index 6f2eb97..ada6e25 100644
  
  .PHONY: clean
  clean:
-@@ -21,3 +29,7 @@ sdl1_video_demo: sdl1_video_demo.c
+@@ -21,3 +29,8 @@ sdl1_video_demo: sdl1_video_demo.c
  
  sdl2_video_demo: sdl2_video_demo.c
  	$(CC) $< -o $@ $(SDL2_CFLAGS) $(CFLAGS) $(SDL2_LDFLAGS) $(LDFLAGS)
 +
++.PHONY: install
 +install: $(ALL_APPS)
-+	$(INSTALL) -d $(BINDIR)
-+	$(INSTALL) -m 0755 -t $(BINDIR) $(ALL_APPS)
++	$(INSTALL) -d $(DESTDIR)$(BINDIR)
++	$(INSTALL) -m 0755 -t $(DESTDIR)$(BINDIR) $(ALL_APPS)
 -- 
 2.38.1
 
