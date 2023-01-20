@@ -109,6 +109,7 @@ stdenv.mkDerivation rec {
   ];
 
   wafConfigureFlags = [
+    "--with-vis-reference-clients"
     "--with-perl-archdir=${placeholder "out"}/lib/perl5/site_perl/${perl.version}"
     "--with-ruby-archdir=${placeholder "out"}/lib/ruby/site_ruby/${ruby.version.libDir}/${stdenv.hostPlatform.system}"
     "--with-ruby-libdir=${placeholder "out"}/lib/ruby/site_ruby/${ruby.version.libDir}/${stdenv.hostPlatform.system}"
