@@ -1,0 +1,54 @@
+--- a/plugins/actor/corona/corona.cpp
++++ b/plugins/actor/corona/corona.cpp
+@@ -29,12 +29,14 @@
+ //
+ /////////////////////////////////////////////////////////////////////////////
+ 
+-#include <libvisual/libvisual.h>
+-
+-#include "corona.h"
+ #include <stdio.h>
+ #include <cstdlib>
+ #include <cmath>
++
++#include "corona.h"
++
++#include <libvisual/libvisual.h>
++
+ using namespace std;
+ 
+ 
+diff --git a/plugins/actor/corona/palette.cpp b/plugins/actor/corona/palette.cpp
+index 36bbdf1..32d99ff 100644
+--- a/plugins/actor/corona/palette.cpp
++++ b/plugins/actor/corona/palette.cpp
+@@ -23,10 +23,11 @@
+  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+  */
+ 
+-#include "palette.h"
+-
+ #include <cstdlib>
+ #include <cstring>
++
++#include "palette.h"
++
+ using namespace std;
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+--- a/plugins/actor/G-Force/Common/GeneralTools/nodeClass.cpp
++++ b/plugins/actor/G-Force/Common/GeneralTools/nodeClass.cpp
+@@ -1,3 +1,5 @@
++#include <stdlib.h>
++
+ #include <libvisual/libvisual.h>
+ 
+ #include "nodeClass.h"
+@@ -5,7 +7,6 @@
+ #include "CEgIStream.h"
+ #include "CEgOStream.h"
+ 
+-#include <stdlib.h>
+ 
+ 
+ #ifdef EG_DEBUG

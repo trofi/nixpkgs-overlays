@@ -21,6 +21,8 @@ final: prev: {
 
   iowatcher = final.callPackage ../iowatcher {};
 
+  libvisual-plugins = final.callPackage ../libvisual-plugins {};
+
   multitextor = final.callPackage ../multitextor {};
 
   seekwatcher = final.callPackage ../seekwatcher {};
