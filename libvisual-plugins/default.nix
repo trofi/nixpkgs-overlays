@@ -25,6 +25,7 @@ stdenv.mkDerivation rec {
 
   patches = [
     ./inline-clobber.patch
+    ./inline.patch
   ];
 
   nativeBuildInputs = [
@@ -55,6 +56,12 @@ stdenv.mkDerivation rec {
   ];
 
   NIX_CFLAGS_COMPILE = [ "-fcommon" ];
+
+  NIX_LDFLAGS = [
+    "-lm"
+    "-lGL"
+    "-lGLU"
+  ];
 
   enableParallelBuilding = true;
 
