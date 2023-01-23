@@ -4,6 +4,7 @@
 
 , SDL2
 , pkg-config
+, portaudio
 , pulseaudio
 
 , unstableGitUpdater
@@ -11,19 +12,17 @@
 
 stdenv.mkDerivation rec {
   pname = "audio_pump_demo";
-  version = "unstable-2023-01-09";
+  version = "unstable-2023-01-19";
 
   src = fetchFromGitHub {
     owner = "hartwork";
     repo = "audio_pump_demo";
-    rev = "42836eff80f2e952aef55fd6e60e42b893318873";
-    sha256 = "sha256-D7uT4BADVlBmGZmn5V3yqy/nhXV4h16x+EKUIFIcx+o=";
+    rev = "48eb3ebf031973cd2b70dffc0b056a1b67100958";
+    sha256 = "sha256-5sV5PjiuVT7anv5mJpsnwZ6cKSvZzQe2asvZyb+XZvk=";
   };
 
-  patches = [ ./0001-makefile-add-trivial-make-install-target.patch ];
-
   nativeBuildInputs = [ pkg-config ];
-  buildInputs = [ SDL2 pulseaudio ];
+  buildInputs = [ SDL2 portaudio pulseaudio ];
 
   makeFlagsArray = [ "PREFIX=${placeholder "out"}" ];
   enableParallelBuilding = true;
