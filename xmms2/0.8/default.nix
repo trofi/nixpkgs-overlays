@@ -43,8 +43,6 @@
 , wavpack
 
 , xmms2
-
-, unstableGitUpdater
 }:
 
 let pypkgs = python2Packages;
@@ -105,10 +103,6 @@ stdenv.mkDerivation rec {
   ];
 
   passthru = {
-    updateScript = unstableGitUpdater {
-      url = "https://github.com/XMMS2/xmms2-devel.git";
-    };
-
     # for client applications that use python bindings
     python = pypkgs.python;
   };
