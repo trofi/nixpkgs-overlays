@@ -12,18 +12,18 @@
 
 stdenv.mkDerivation rec {
   pname = "sdl_video_demo";
-  version = "unstable-2023-01-13";
+  version = "unstable-2023-01-16";
 
   src = fetchFromGitHub {
     owner = "hartwork";
     repo = "sdl_video_demo";
-    rev = "6cb760b286b808359f65c1c73d8742301138f754";
-    sha256 = "sha256-XKTYiEPndBGaE26aZkbcH67YDr0aTtrVbGKdM18Y22A=";
+    rev = "1d7f29d18da4adbf9e44bf5dde8ca6cf6844d375";
+    sha256 = "sha256-jbJQ9gznRUVxZwQij6imNrU/EZbTilh9Ceh8C7bPCI0=";
   };
 
-  patches = [ ./0001-Makefile-add-make-install-trivial-target.patch ];
-
   nativeBuildInputs = [ pkg-config ];
+  # TODO: drop SDL2 when https://github.com/NixOS/nixpkgs/pull/211150
+  # propagates enough.
   buildInputs = [ SDL_gfx SDL2 ];
 
   makeFlagsArray = [ "PREFIX=${placeholder "out"}" ];
