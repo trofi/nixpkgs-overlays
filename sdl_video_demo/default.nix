@@ -22,8 +22,6 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ pkg-config ];
-  # TODO: drop SDL2 when https://github.com/NixOS/nixpkgs/pull/211150
-  # propagates enough.
   buildInputs = [ SDL_gfx SDL2 ];
 
   makeFlagsArray = [ "PREFIX=${placeholder "out"}" ];
