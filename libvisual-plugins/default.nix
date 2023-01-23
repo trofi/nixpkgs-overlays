@@ -53,6 +53,10 @@ stdenv.mkDerivation rec {
     "--disable-gstreamer-plugin"
     # don't attempt to write to libvirual's directory
     "--with-plugins-base-dir=${placeholder "out"}/plugins"
+
+    # crashes on load
+    "--disable-infinite"
+    "--disable-nastyfft"
   ];
 
   NIX_CFLAGS_COMPILE = [ "-fcommon" ];
