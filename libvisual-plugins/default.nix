@@ -16,17 +16,12 @@
 
 stdenv.mkDerivation rec {
   pname = "libvisual-plugins";
-  version = "0.4.0";
+  version = "0.4.1";
 
   src = fetchurl {
     url = "mirror://sourceforge/libvisual/${pname}-${version}.tar.gz";
-    hash = "sha256-i3g6ER1UuSUCCFGZw1GXnQRSuVD83d3R6uKKFthQjps=";
+    hash = "sha256-gRsa4VfNogxzDeGiySvRMQDKO3dsTnOUrIk0W6vIbSY=";
   };
-
-  patches = [
-    ./inline-clobber.patch
-    ./inline.patch
-  ];
 
   nativeBuildInputs = [
     bison
@@ -47,24 +42,12 @@ stdenv.mkDerivation rec {
   ];
 
   configureFlags = [
-    # leeds alsa-0.9
+    # needs alsa-0.9
     "--disable-alsa"
     # needs gstreamer-0.8
     "--disable-gstreamer-plugin"
     # don't attempt to write to libvirual's directory
     "--with-plugins-base-dir=${placeholder "out"}/plugins"
-
-    # crashes on load
-    "--disable-infinite"
-    "--disable-nastyfft"
-  ];
-
-  NIX_CFLAGS_COMPILE = [ "-fcommon" ];
-
-  NIX_LDFLAGS = [
-    "-lm"
-    "-lGL"
-    "-lGLU"
   ];
 
   enableParallelBuilding = true;
