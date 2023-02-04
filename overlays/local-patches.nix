@@ -27,12 +27,4 @@ final: prev: {
       ];
     });
   };
-
-  wineWowPackages = prev.wineWowPackages // {
-    waylandFull = prev.wineWowPackages.waylandFull.overrideAttrs (oa: {
-      patches = (oa.patches or []) ++ [
-        ../wine-wayland/wine-wayland-modifierless.patch
-      ];
-    });
-  };
 }
