@@ -44,5 +44,6 @@ stdenv.mkDerivation rec {
     license = licenses.publicDomain;
     maintainers = with maintainers; [ trofi ];
     platforms = platforms.all;
+    mainProgram = "uselex.rb";
   };
 }
