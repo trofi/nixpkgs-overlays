@@ -11,15 +11,6 @@ final: prev: {
     ];
   });
 
-  # a milder form of https://github.com/NixOS/nixpkgs/pull/215272
-  vifm = prev.vifm.overrideAttrs (oa: {
-    nativeBuildInputs = [ prev.perl ] ++ oa.nativeBuildInputs;
-    postPatch = ''
-      # Avoid '#!/usr/bin/env perl' reverences to build help.
-      patchShebangs --build src/helpztags
-    '' + (oa.postPatch or "");
-  });
-
   xwayland = prev.xwayland.override {
     libXfont2 = prev.xorg.libXfont2.overrideAttrs (oa: {
       patches = (oa.patches or []) ++ [
