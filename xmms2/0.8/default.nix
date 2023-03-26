@@ -18,9 +18,9 @@
 , flac
 , flex
 , fluidsynth
+, game-music-emu
 , glib
 , libao
-, libgme
 , libmad
 , libmms
 , libofa
@@ -65,9 +65,9 @@ stdenv.mkDerivation rec {
     faad2
     flac
     fluidsynth
+    game-music-emu
     glib
     libao
-    libgme
     libofa
     libogg
     libopus opusfile

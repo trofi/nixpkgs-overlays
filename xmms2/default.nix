@@ -19,9 +19,9 @@
 , ffmpeg
 , flex
 , fluidsynth
+, game-music-emu
 , glib
 , libao
-, libgme
 , libmad
 , libmms
 , libmodplug
@@ -74,9 +74,9 @@ stdenv.mkDerivation rec {
     ffmpeg
     flac
     fluidsynth
+    game-music-emu
     glib
     libao
-    libgme
     libofa
     libogg
     libopus opusfile
