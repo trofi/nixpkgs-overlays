@@ -23,16 +23,6 @@ final: prev: {
 
   libvisual-plugins = final.callPackage ../libvisual-plugins {};
 
-  liferea = prev.liferea.overrideAttrs (oa: rec {
-    # Downgrade from -.14.1 until upstream bug is fixed:
-    #   https://github.com/lwindolf/liferea/issues/1212
-    version = "1.14.0";
-    src = prev.fetchurl {
-      url = "https://github.com/lwindolf/liferea/releases/download/v${version}/liferea-${version}.tar.bz2";
-      sha256 = "sha256-uC3ksJ4nNXBjQYqNOS4qK6aCK6/Wzf27YXHbM73TpdU=";
-    };
-  });
-
   multitextor = final.callPackage ../multitextor {};
 
   seekwatcher = final.callPackage ../seekwatcher {};
