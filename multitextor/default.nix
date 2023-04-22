@@ -10,13 +10,13 @@
 
 stdenv.mkDerivation rec {
   pname = "multitextor";
-  version = "unstable-2022-08-07";
+  version = "unstable-2023-03-16";
 
   src = fetchFromGitHub {
     owner = "vikonix";
     repo = "multitextor";
-    rev = "c97233c3100f27f4cac3a76b7cdc3163f44c0eb8";
-    sha256 = "sha256-5evng3gJoycE5P0rRX/ziiPtzw9D42aMCCaiW7YwWgs=";
+    rev = "276393f81c4302bb586c63a764a1dc21e6529284";
+    sha256 = "sha256-/JHJ5EQDguRvZ2v+uvK7V67ammuA/DpgsbUNhC/EqzE=";
   };
 
   nativeBuildInputs = [ cmake ];
