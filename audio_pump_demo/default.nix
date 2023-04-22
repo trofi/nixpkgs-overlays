@@ -12,13 +12,13 @@
 
 stdenv.mkDerivation rec {
   pname = "audio_pump_demo";
-  version = "unstable-2023-01-19";
+  version = "unstable-2023-04-18";
 
   src = fetchFromGitHub {
     owner = "hartwork";
     repo = "audio_pump_demo";
-    rev = "48eb3ebf031973cd2b70dffc0b056a1b67100958";
-    sha256 = "sha256-5sV5PjiuVT7anv5mJpsnwZ6cKSvZzQe2asvZyb+XZvk=";
+    rev = "5b1486d7b3d5d62532e7bb2f54fc6046e04fbed5";
+    sha256 = "sha256-uSrGydogYSwxiOVDoz+a82P/VcdItwa8LDlptg6gH8U=";
   };
 
   nativeBuildInputs = [ pkg-config ];
