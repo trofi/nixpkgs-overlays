@@ -55,13 +55,13 @@ in
 
 stdenv.mkDerivation rec {
   pname = "xmms2";
-  version = "unstable-2023-04-22";
+  version = "unstable-2023-05-12";
 
   src = fetchFromGitHub {
     owner = "XMMS2";
     repo = "xmms2-devel";
-    rev = "31f4596d8afaf282199d186fa5ccbe39e5c6f267";
-    sha256 = "sha256-L72jt/wifjOMXGcopr146i+B2wfRKhHpRHqwJ2wmeM4=";
+    rev = "3030f64d87ef672f454596ac00e4cb41cc7eb111";
+    sha256 = "sha256-mFpJGRWOGcUdquBJsBvlK99W/YORouCA77Fw4qPZLVQ=";
     fetchSubmodules = true;
   };
 
