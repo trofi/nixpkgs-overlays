@@ -23,7 +23,7 @@ let e =
       autogen
 
       # valgrind annotations
-      valgrind
+      valgrind valgrind.dev
 
       # toolchain itself
       gcc
