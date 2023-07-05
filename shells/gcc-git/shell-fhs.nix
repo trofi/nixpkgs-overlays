@@ -9,6 +9,7 @@ let e =
       isl
       libffi libffi.dev
       libmpc
+      libxcrypt
       mpfr mpfr.dev
       zlib zlib.dev
 
