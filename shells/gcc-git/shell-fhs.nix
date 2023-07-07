@@ -11,6 +11,7 @@ let e =
       libmpc
       libxcrypt
       mpfr mpfr.dev
+      xz xz.dev
       zlib zlib.dev
 
       # git checkout need flex as they are not complete release tarballs
