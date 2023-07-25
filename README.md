@@ -28,9 +28,7 @@ as:
   ];
   environment.systemPackages = with pkgs; [
     # ...
-    corsix-th
     iowatcher
-    multitextor
     seekwatcher
     ski
     uselex

@@ -15,15 +15,11 @@ final: prev: {
   audio_pump_demo = final.callPackage ../audio_pump_demo {};
   sdl_video_demo = final.callPackage ../sdl_video_demo {};
 
-  corsix-th = final.callPackage ../corsix-th {};
-
   dwarffs = final.callPackage ../dwarffs {};
 
   iowatcher = final.callPackage ../iowatcher {};
 
   libvisual-plugins = final.callPackage ../libvisual-plugins {};
-
-  multitextor = final.callPackage ../multitextor {};
 
   seekwatcher = final.callPackage ../seekwatcher {};
 
