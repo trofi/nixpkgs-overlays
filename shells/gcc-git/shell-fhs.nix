@@ -1,4 +1,6 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ system ? builtins.currentSystem
+, pkgs ? import <nixpkgs> { inherit system; }
+}:
 
 let e =
   pkgs.buildFHSEnv {
