@@ -42,7 +42,7 @@
 , sqlite
 , tremor
 , valgrind
-, wafHook, waf
+, waf
 , wavpack
 
 , xmms2
@@ -105,7 +105,7 @@ stdenv.mkDerivation rec {
     pypkgs.cython
     pypkgs.python
     valgrind
-    wafHook
+    waf.hook
   ];
 
   wafConfigureFlags = [
