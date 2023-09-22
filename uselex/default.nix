@@ -10,13 +10,13 @@
 
 stdenv.mkDerivation rec {
   pname = "uselex";
-  version = "unstable-2022-08-29";
+  version = "unstable-2023-09-22";
 
   src = fetchFromGitHub {
     owner = "trofi";
     repo = "uselex";
-    rev = "5cf79a872f3331ce87171e66cf27c430585f65af";
-    sha256 = "sha256-0aFJaGLcrrEkOH3cFs2uHjkCUw9ndckngfnb0J1FK7c=";
+    rev = "ad75f2c87355c89ecd4053d87ca2f4a7eff151cb";
+    sha256 = "sha256-QNC+ieGhS0Wu0t9s2dxagmx5LT0PtVW779qU+l11AVA=";
   };
 
   buildInputs = [ ruby_3_1 ];
