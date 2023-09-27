@@ -35,6 +35,9 @@ let e =
       stdenv.cc.libc stdenv.cc.libc_dev
 
       # Add /lib/cpp symlink. Used by profiledbootstrap.
+      # Can be removed once gcc rebases against autoconf with
+      # b560f0a657 "AC_PROG_*CPP: Try ‘cpp’ before ‘/lib/cpp’" fix
+      # which is in 2.70 and later.
       (pkgs.runCommand "mk-lib-cpp" {} ''
         mkdir -p $out/lib
         ln -s ${stdenv.cc}/bin/cpp $out/lib/
