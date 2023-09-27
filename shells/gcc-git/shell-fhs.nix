@@ -33,6 +33,12 @@ let e =
       gcc
       stdenv.cc
       stdenv.cc.libc stdenv.cc.libc_dev
+
+      # Add /lib/cpp symlink. Used by profiledbootstrap.
+      (pkgs.runCommand "mk-lib-cpp" {} ''
+        mkdir -p $out/lib
+        ln -s ${stdenv.cc}/bin/cpp $out/lib/
+      '')
     ];
   };
 in e.env
