@@ -9,7 +9,7 @@ let e =
       cmake
       gcc
       ninja
-      python3
+      (python3.withPackages (pps: [ pps.psutil ]))
 
       # optional library depends
       valgrind valgrind.dev
