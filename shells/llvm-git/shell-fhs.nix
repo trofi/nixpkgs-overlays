@@ -10,6 +10,10 @@ let e =
       gcc
       ninja
       python3
+
+      # optional library depends
+      valgrind valgrind.dev
+      libpfm
     ];
   };
 in e.env
