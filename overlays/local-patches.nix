@@ -11,11 +11,13 @@ final: prev: {
     ];
   });
 
-  nixVersions.unstable = prev.nixVersions.unstable.overrideAttrs(oa: {
-    patches = (oa.patches or []) ++ [
-      ../nix/editor-no-nl.patch
-    ];
-  });
+  nixVersions = prev.nixVersions // {
+    unstable = prev.nixVersions.unstable.overrideAttrs(oa: {
+      patches = (oa.patches or []) ++ [
+        ../nix/editor-no-nl.patch
+      ];
+    });
+  };
 
   xwayland = prev.xwayland.override {
     libXfont2 = prev.xorg.libXfont2.overrideAttrs (oa: {
