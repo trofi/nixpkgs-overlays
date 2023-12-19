@@ -1,5 +1,11 @@
-{ system ? builtins.currentSystem
-, pkgs ? import <nixpkgs> { inherit system; }
+{ localSystem ? { system = builtins.currentSystem; }
+, crossSystem ? localSystem
+, pkgs ? import <nixpkgs> (
+  { inherit localSystem; } // (if (localSystem == crossSystem) then {} else {
+    # TODO: ideally <nixpkgs> should yield the same result if
+    # 'crossSystem' is passed explicitly and 'localSystem == crossSystem'
+    inherit crossSystem;
+  }))
 }:
 
 let e =
