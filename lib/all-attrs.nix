@@ -83,13 +83,13 @@ let
                  (lib.attrsToList (removeAttrs v ignoreList));
     in debug "inspecting ${a}" (
     if !e.success then info "${a} fails to evaluate" []
+    else if isPrimitive v then []
     else if lib.isDerivation v
     then [a] ++ lib.optionals (!ignoreDrvAttrs) maybe_go_deeper
     # Skip "foo = self;" attributes like `pythonPackages.pythonPackages`
     # TODO: might skip too much.
     else if lib.isAttrs v && depth > 0 && lib.hasAttr (lib.last ap) v then info "${a} is a repeated attribute, skipping" []
     else if lib.isAttrs v then maybe_go_deeper
-    else if isPrimitive v then []
     # should not get here
     else warn "unhandled type of ${a}" []);
 in lib.flatten (go 0 [] root)
