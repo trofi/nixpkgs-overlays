@@ -35,6 +35,11 @@
 , maxDepth
 
 , ignoreCross ? true
+
+# Whether to validate every attribute within derivations themselves.
+# Most intereting fields are `passthru.tests`, but sometimes there are
+# very unusual bugs lurking. Risky but very fun!
+, ignoreDrvAttrs ? true
 }:
 
 let
@@ -76,11 +81,9 @@ let
     in debug "inspecting ${a}" (
     if !e.success then info "${a} fails to evaluate" []
     else if lib.isDerivation v
-    # TODO: add an option to traverse into derivations as well.
-    # Mainly to test validity of `passthru.tests`, `metadata` and
-    # similar.
-    then [a] # TODO: "++ maybe_go_deeper"
+    then [a] ++ lib.optionals (!ignoreDrvAttrs) maybe_go_deeper
     # Skip "foo = self;" attributes like `pythonPackages.pythonPackages`
+    # TODO: might skip too much.
     else if lib.isAttrs v && depth > 0 && lib.hasAttr (lib.last ap) v then info "${a} is a repeated attribute, skipping" []
     else if lib.isAttrs v then maybe_go_deeper
     else if isPrimitive v then []
