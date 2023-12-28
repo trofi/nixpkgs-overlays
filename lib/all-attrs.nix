@@ -21,16 +21,29 @@
 , verbose ? 1 # warn
 
 # How to pick, resource usage for me as of 2023-12-28:
-# 1 - 10 seconds, ~2GB of RAM
-# 2 - 2 minutes, ~25GB of RAM (unfiltered attrs)
-# 3 - 5+ minutes, ~70GB+ or RAM Fails on attributes like `pkgsCross.iphone32.ammonite`
+# Without ignoreCross:
+# - 1 - 10 seconds, ~2GB of RAM
+# - 2 - 30 seconds, ~6GB or RAM
+# - 3 - 1 minute, ~10GB of RAM
+# - 4 - 2 minutes, ~25GB of RAM
+# - 5 - 3 minutes, ~50GB of RAM
+# With ignoreCross:
+# - 1 - 10 seconds, ~2GB of RAM
+# - 2 - 2 minutes, ~25GB of RAM (unfiltered attrs)
+# - 3 - 5+ minutes, ~70GB+ or RAM Fails on attributes like `pkgsCross.iphone32.ammonite`
 # anything else: at your risk
 , maxDepth
+
+, ignoreCross ? true
 }:
 
 let
   # simple variables:
   lib = nixpkgs.lib;
+  ignorable = import ./ignorable-attrs.nix {
+    inherit lib;
+    inherit ignoreCross;
+  };
 
   # logging:
   err   = s: e: lib.trace "ERROR: ${s}" e;
@@ -59,7 +72,7 @@ let
         if depth >= maxDepth
         then info "too deep (depth=${toString depth}) nesting of a=${a}, stop" []
         else map (nv: go (depth + 1) (ap ++ [nv.name]) nv.value)
-                 (lib.attrsToList v);
+                 (lib.attrsToList (removeAttrs v ignorable.anyLevel));
     in debug "inspecting ${a}" (
     if !e.success then info "${a} fails to evaluate" []
     else if lib.isDerivation v
@@ -67,8 +80,10 @@ let
     # Mainly to test validity of `passthru.tests`, `metadata` and
     # similar.
     then [a] # TODO: "++ maybe_go_deeper"
+    # Skip "foo = self;" attributes like `pythonPackages.pythonPackages`
+    else if lib.isAttrs v && depth > 0 && lib.hasAttr (lib.last ap) v then info "${a} is a repeated attribute, skipping" []
     else if lib.isAttrs v then maybe_go_deeper
     else if isPrimitive v then []
     # should not get here
     else warn "unhandled type of ${a}" []);
-in lib.flatten (go 0 [] root)
+in lib.flatten (go 0 [] (removeAttrs root ignorable.topLevel))
