@@ -8,6 +8,8 @@
 }:
 {
   topLevel = [
+    # workaroound: fails eval
+    "swiftPackages"
 
   ] ++ lib.optionals ignoreCross [
     # Has many targets, significantly increases RAM usage.
@@ -41,8 +43,5 @@
     "pkgsStatic"
     "pkgsCross"
     "pkgsi686Linux"
-
-    # workaroound: fails eval
-    "swiftPackages"
   ];
 }
