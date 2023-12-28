@@ -43,5 +43,8 @@
     "pkgsStatic"
     "pkgsCross"
     "pkgsi686Linux"
+
+    # workarounds: gemType is somehow null all the time
+    "gemType"
   ];
 }
