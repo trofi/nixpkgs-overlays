@@ -73,11 +73,14 @@ let
     let
       a = lib.showAttrPath ap;
       e = builtins.tryEval v;
+      ignoreList = if depth == 0
+                   then ignorable.topLevel
+                   else ignorable.anyLevel;
       maybe_go_deeper =
         if depth >= maxDepth
         then info "too deep (depth=${toString depth}) nesting of a=${a}, stop" []
         else map (nv: go (depth + 1) (ap ++ [nv.name]) nv.value)
-                 (lib.attrsToList (removeAttrs v ignorable.anyLevel));
+                 (lib.attrsToList (removeAttrs v ignoreList));
     in debug "inspecting ${a}" (
     if !e.success then info "${a} fails to evaluate" []
     else if lib.isDerivation v
@@ -89,4 +92,4 @@ let
     else if isPrimitive v then []
     # should not get here
     else warn "unhandled type of ${a}" []);
-in lib.flatten (go 0 [] (removeAttrs root ignorable.topLevel))
+in lib.flatten (go 0 [] root)
