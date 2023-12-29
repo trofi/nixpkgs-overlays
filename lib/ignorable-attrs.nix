@@ -5,6 +5,7 @@
 #   there are knobs to traverse more package sets to increase the span.
 { lib
 , ignoreCross ? true
+, ignoreDrvAttrs ? true
 }:
 {
   topLevel = [
@@ -14,6 +15,9 @@
   ] ++ lib.optionals ignoreCross [
     # Has many targets, significantly increases RAM usage.
     "pkgsCross"
+  ] ++ lib.optionals (!ignoreDrvAttrs) [
+    # Each test is very heavy.
+    "nixosTests"
   ];
 
   anyLevel = [
@@ -46,5 +50,10 @@
 
     # workarounds: gemType is somehow null all the time
     "gemType"
+
+    # causes derivation evalutaion, not usually needed if we traverse
+    # every other attribute.
+    "drvPath"
+    "outPath"
   ];
 }

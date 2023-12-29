@@ -48,6 +48,7 @@ let
   ignorable = import ./ignorable-attrs.nix {
     inherit lib;
     inherit ignoreCross;
+    inherit ignoreDrvAttrs;
   };
 
   # logging:
