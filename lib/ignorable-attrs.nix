@@ -21,6 +21,10 @@
   ];
 
   anyLevel = [
+    # Usually contains full package set most of which are not used for
+    # bootstrap.
+    "__bootPackages"
+
     # internal implementation of package sets, never needs explicit
     # traversal:
     "__splicedPackages"
