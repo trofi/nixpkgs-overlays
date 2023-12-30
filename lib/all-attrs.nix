@@ -58,7 +58,8 @@ let
   debug = s: e: if verbose >= 3 then lib.trace "DEBUG: ${s}" e else e;
 
   # root to start at
-  root = lib.attrByPath (lib.splitString "." rootAttr)
+  rap = lib.splitString "." rootAttr;
+  root = lib.attrByPath rap
                         (warn "did not find ${rootAttr}" {})
                         nixpkgs;
   # other helpers:
@@ -93,4 +94,4 @@ let
     else if lib.isAttrs v then maybe_go_deeper
     # should not get here
     else warn "unhandled type of ${a}" []);
-in lib.flatten (go 0 [] root)
+in lib.flatten (go (lib.length rap) rap root)
