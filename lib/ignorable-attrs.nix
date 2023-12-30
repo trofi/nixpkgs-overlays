@@ -59,5 +59,9 @@
     # every other attribute.
     "drvPath"
     "outPath"
+  ] ++ lib.optionals (!ignoreDrvAttrs) [
+    # Shared and very heavy implementation detail of nixosTests.
+    "driver"
+    "driverInteractive"
   ];
 }
