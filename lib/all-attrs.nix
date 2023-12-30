@@ -75,7 +75,7 @@ let
     let
       a = lib.showAttrPath ap;
       e = builtins.tryEval v;
-      ignoreList = if depth == 0
+      ignoreList = if depth == 1
                    then ignorable.topLevel
                    else ignorable.anyLevel;
       maybe_go_deeper =
@@ -90,7 +90,7 @@ let
     then [a] ++ lib.optionals (!ignoreDrvAttrs) maybe_go_deeper
     # Skip "foo = self;" attributes like `pythonPackages.pythonPackages`
     # TODO: might skip too much.
-    else if lib.isAttrs v && depth > 0 && lib.hasAttr (lib.last ap) v then info "${a} is a repeated attribute, skipping" []
+    else if lib.isAttrs v && depth > 1 && lib.hasAttr (lib.last ap) v then info "${a} is a repeated attribute, skipping" []
     else if lib.isAttrs v then maybe_go_deeper
     # should not get here
     else warn "unhandled type of ${a}" []);
