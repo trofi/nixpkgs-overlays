@@ -59,6 +59,11 @@
     # every other attribute.
     "drvPath"
     "outPath"
+
+    # vmTools.diskImages has import-from-derivation, an example is
+    #     vmTools.diskImages.centos6i386.rpms
+    # Let's narrow it down to the failing attributes.
+    "centos6i386"
   ] ++ lib.optionals (!ignoreDrvAttrs) [
     # Shared and very heavy implementation detail of nixosTests.
     "driver"
