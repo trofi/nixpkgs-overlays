@@ -77,7 +77,7 @@ let
     let
       a = lib.showAttrPath ap;
       e = builtins.tryEval v;
-      ignoreList = if depth == 0
+      ignoreList = if depth == 0 || depth == lib.length rap
                    then ignorable.topLevel
                    else ignorable.anyLevel;
       maybe_go_deeper =
