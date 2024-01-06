@@ -2,7 +2,10 @@
 # derivations.
 
 # Usage example:
-# $ nix-instantiate --eval --strict ~/.config/nixpkgs/lib/all-attrs.nix -I nixpkgs=$PWD --arg maxDepth 2 --arg verbose 3
+# $ nix-instantiate --read-write-mode --eval --strict ~/.config/nixpkgs/lib/all-attrs.nix -I nixpkgs=$PWD --arg maxDepth 2 --arg verbose 3
+#
+# --read-write-mode is needed to evaluate expressions that read directly
+# from store. Examples are `vmTools` and `stubby`.
 
 # TODOs:
 # - remove clearly redundant attributes (similar to hydra, but leave
