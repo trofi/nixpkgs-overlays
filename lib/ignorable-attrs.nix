@@ -55,6 +55,11 @@
     # workarounds: gemType is somehow null all the time
     "gemType"
 
+    # workarounds: ocaml packages have incomplete environment:
+    #   https://github.com/NixOS/nixpkgs/issues/277698
+    "ocamlPackages_4_14_janeStreet_0_15"
+    "janeStreet_0_15"
+
     # causes derivation evalutaion, not usually needed if we traverse
     # every other attribute.
     "drvPath"
