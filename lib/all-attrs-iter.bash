@@ -5,7 +5,7 @@ result=$(mktemp)
 
 while :; do
     printf "Continuing from '$resume_from'\n" >&2
-    nix-instantiate --json --strict --eval \
+    nix-instantiate --json --strict --eval --read-write-mode \
         all-attrs-iter.nix \
         --arg maxDepth 1 \
         --argstr resumeFrom "$resume_from" \
