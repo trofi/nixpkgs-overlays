@@ -112,7 +112,7 @@ let
       maybe_go_deeper =
         if depth >= maxDepth
         then info "too deep (depth=${toString depth}) nesting of a=${a}, stop" skip
-        else add_vals args (lib.attrsToList tree);
+        else add_vals args (lib.attrsToList (removeAttrs tree ignoreList));
     in debug "inspecting ${a} (depth=${toString depth}, left=${toString left})" (
     if      left == 0 then info "${a}: hit step limit" skip
     else if left < 0 then info "${a}: previous leaf hit step limit, just skip" skip
