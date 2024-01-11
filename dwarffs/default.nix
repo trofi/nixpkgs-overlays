@@ -4,13 +4,17 @@
 
 , boost
 , fuse
-, nix
+, nixVersions
 , nlohmann_json
 
 , unstableGitUpdater
 }:
 
-stdenv.mkDerivation rec {
+let
+  # Does not work against latest `nix`:
+  #   https://github.com/edolstra/dwarffs/issues/26
+  nix = nixVersions.nix_2_18;
+in stdenv.mkDerivation rec {
   pname = "dwarffs";
   version = "unstable-2023-08-22";
 
@@ -22,7 +26,7 @@ stdenv.mkDerivation rec {
   };
 
   buildInputs = [ fuse nix nlohmann_json boost ];
-  NIX_CFLAGS_COMPILE = "-I ${nix.dev}/include/nix -include ${nix.dev}/include/nix/config.h -D_FILE_OFFSET_BITS=64 -DVERSION=\"${version}\"";
+  env.NIX_CFLAGS_COMPILE = "-I ${nix.dev}/include/nix -include ${nix.dev}/include/nix/config.h -D_FILE_OFFSET_BITS=64 -DVERSION=\"${version}\"";
 
   installPhase = ''
     mkdir -p $out/bin $out/lib/systemd/system
