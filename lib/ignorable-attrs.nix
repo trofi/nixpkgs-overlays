@@ -57,10 +57,6 @@
     "ocamlPackages_4_14_janeStreet_0_15"
     "janeStreet_0_15"
 
-    # workarounds: `tests.cuda` has unsatisfied parameters:
-    #   https://github.com/NixOS/nixpkgs/issues/280377
-    "cuda"
-
     # causes derivation evalutaion, not usually needed if we traverse
     # every other attribute.
     "drvPath"
