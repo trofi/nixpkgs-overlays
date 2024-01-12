@@ -110,7 +110,12 @@ let
         else lib.foldl' (c: v: go (depth + 1) (ap ++ [v.name]) v.value [] c) ctx vs;
 
       maybe_go_deeper =
-        if depth >= maxDepth
+        let
+          # we visit parents after we visit children. If that was the
+          # last position we stopped at then do not descend.
+          at_pos = lib.length pos == 1 && lib.last pos == lib.last ap;
+        in
+        if depth >= maxDepth && !at_pos
         then info "too deep (depth=${toString depth}) nesting of a=${a}, stop" skip
         else add_vals args (lib.attrsToList (removeAttrs tree ignoreList));
     in debug "inspecting ${a} (depth=${toString depth}, left=${toString left})" (
