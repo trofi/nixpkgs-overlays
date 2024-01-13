@@ -4,15 +4,13 @@
 # growing RAM usage by `nix` when it comes to parge trees traversal:
 #   https://github.com/NixOS/nix/issues/9671
 
-# TODO: an external script to drive it.
-
 # Implementation:
 # - We track the depth and progress of a tree traversal and bail out from
 #   the traversal when we reach allowed limit (say, 1000 steps).
 # - We return the progress so far to continue from there.
 
 # Usage example:
-# TODO
+# $ ./all-attrs-iter.bash -I nixpkgs=/home/slyfox/n --arg maxDepth 3 --arg stepLimit 30 --arg ignoreDrvAttrs false --arg verbose 3 --argstr rootAttr pkgsLLVM
 
 { nixpkgs ? import <nixpkgs> {
     config = {
@@ -95,16 +93,13 @@ let
         if left < 0 then {}
         else if left == 0 then { stop_at = a; }
         else { result = result ++ [v.name]; });
-      # TODO: ignore list / skip list
       # TODO: short-circuit fold when the limit is hit
       add_vals = ctx: vs:
         if lib.length pos > 0
         then let
           ph = lib.head pos;
           pt = lib.tail pos;
-          # TODO: could implement a dropWhile as an optimization
           # TODO: unify with a default case
-          # TODO: carefully examine if we skip subtrees, rescan them or all is fine
           fvs = lib.filter (v: !(v.name < ph)) vs;
         in lib.foldl' (c: v: go (depth + 1) (ap ++ [v.name]) v.value (if v.name == ph then pt else []) c) ctx fvs
         else lib.foldl' (c: v: go (depth + 1) (ap ++ [v.name]) v.value [] c) ctx vs;
