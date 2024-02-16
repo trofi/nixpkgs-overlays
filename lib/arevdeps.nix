@@ -55,6 +55,7 @@ let
     "pkgsBuildBuild"
     "pkgsBuildHost"
     "pkgsBuildTarget"
+    "pkgsExtraHardening"
     "pkgsHostHost"
     "pkgsHostTarget"
     "pkgsTargetTarget"
