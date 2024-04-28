@@ -18,6 +18,9 @@
       #allowAliases = false;
       #allowBroken = true;
       #allowUnfree = true;
+
+      # Don't force builds on string interpolation.
+      contentAddressedByDefault = false;
     };
   }
 , rootAttr ? null
