@@ -11,7 +11,7 @@ the file. Typical top-to-bottom is:
  
          old_len = len(data)
 +        data.reverse()
-         data = data[0:state.index] + data[state.end():]
+         data = data[0 : state.index] + data[state.end() :]
 +        data.reverse()
          assert len(data) < old_len
  
