@@ -94,6 +94,10 @@ let
     "scope"
     "pkgs"
 
+    # At least pkgsLinux.pkgsStatic.aml fails to eval as:
+    #   error: attribute 'sharedLibrary' missing
+    "pkgsStatic"
+
     "buildHaskellPackages"
     "buildPackages"
     "generateOptparseApplicativeCompletions"
