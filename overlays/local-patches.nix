@@ -12,7 +12,7 @@ final: prev: {
   });
 
   nixVersions = prev.nixVersions // {
-    unstable = prev.nixVersions.unstable.overrideAttrs(oa: {
+    unstable = (prev.nixVersions.latest or prev.nixVersions.unstable).overrideAttrs(oa: {
       patches = (oa.patches or []) ++ [
         ../nix/editor-no-nl.patch
       ];
