@@ -16,8 +16,6 @@
 , libiberty
 , ncurses
 
-, withGtk ? true, gnome2
-
 , unstableGitUpdater
 , ski
 }:
@@ -53,14 +51,6 @@ stdenv.mkDerivation rec {
     libbfd
     libiberty
     ncurses
-  ] ++ lib.optionals withGtk [
-    gnome2.libglade
-    gnome2.libgnomeui
-  ]
-  ;
-
-  configureFlags = lib.optionals withGtk [
-    "--with-gtk"
   ];
 
   makeFlags = [
@@ -72,9 +62,6 @@ stdenv.mkDerivation rec {
   passthru = {
     updateScript = unstableGitUpdater {
       url = "https://github.com/trofi/ski.git";
-    };
-    tests = {
-      noGui = ski.override { withGtk = false; };
     };
   };
 

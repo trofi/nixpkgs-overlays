@@ -6,9 +6,6 @@
       libbfd
       libiberty
       ncurses
-      ## gtk
-      gnome2.libglade
-      gnome2.libgnomeui
 
       # maintainer tools
       autoconf
@@ -25,6 +22,6 @@
     ];
     shellHook = ''
       mkj() { make -j$(nproc) "$@"; }
-      acm() { ./autogen.sh && ./configure --with-gtk --enable-werror "$@" && mkj; }
+      acm() { ./autogen.sh && ./configure --enable-werror "$@" && mkj; }
     '';
   }
