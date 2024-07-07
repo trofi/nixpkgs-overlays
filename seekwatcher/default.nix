@@ -19,11 +19,11 @@ python3.pkgs.buildPythonApplication rec {
 
   postPatch = ''
       # embed absolute paths
-      substituteInPlace --replace-fail cmd/seekwatcher --replace '"blktrace"' '"${blktrace}/bin/blktrace"'
-      substituteInPlace --replace-fail cmd/seekwatcher --replace "'blkparse " "'${blktrace}/bin/blkparse "
-      # always expose `ffmpeg` as available
-      substituteInPlace --replace-fail cmd/seekwatcher --replace '"ffmpeg ' '"${lib.getBin ffmpeg}/bin/ffmpeg '
-      substituteInPlace --replace-fail cmd/seekwatcher --replace 'check_for_ffmpeg("ffmpeg")' 'True'
+      substituteInPlace cmd/seekwatcher --replace-fail '"blktrace"' '"${blktrace}/bin/blktrace"'
+      substituteInPlace cmd/seekwatcher --replace-fail "'blkparse " "'${blktrace}/bin/blkparse "
+      # always expose `fable
+      substituteInPlace cmd/seekwatcher --replace-fail '"ffmpeg ' '"${lib.getBin ffmpeg}/bin/ffmpeg '
+      substituteInPlace cmd/seekwatcher --replace-fail 'check_for_ffmpeg("ffmpeg")' 'True'
   '';
 
   propagatedBuildInputs = with python3.pkgs; [
