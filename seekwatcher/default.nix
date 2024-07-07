@@ -3,25 +3,27 @@
 , fetchFromGitHub
 , python3
 , blktrace
-, mplayer
+, ffmpeg
 }:
 
 python3.pkgs.buildPythonApplication rec {
   pname = "seekwatcher";
-  version = "0.14";
+  version = "0.15";
 
   src = fetchFromGitHub {
     owner = "trofi";
     repo = "seekwatcher";
     rev = "v${version}";
-    sha256 = "sha256-bz6EGGXQQsS3LQdb7faiJDPtGCNbLAhAh+kk8mNmECs=";
+    hash = "sha256-If++XxuenLCXxnG7C7YZYMz/eQ6V3NfZVsyVnnRdM98=";
   };
 
   postPatch = ''
       # embed absolute paths
-      substituteInPlace cmd/seekwatcher --replace '"blktrace"' '"${blktrace}/bin/blktrace"'
-      substituteInPlace cmd/seekwatcher --replace "'blkparse " "'${blktrace}/bin/blkparse "
-      substituteInPlace cmd/seekwatcher --replace '"mencoder ' '"${mplayer}/bin/mencoder '
+      substituteInPlace --replace-fail cmd/seekwatcher --replace '"blktrace"' '"${blktrace}/bin/blktrace"'
+      substituteInPlace --replace-fail cmd/seekwatcher --replace "'blkparse " "'${blktrace}/bin/blkparse "
+      # always expose `ffmpeg` as available
+      substituteInPlace --replace-fail cmd/seekwatcher --replace '"ffmpeg ' '"${lib.getBin ffmpeg}/bin/ffmpeg '
+      substituteInPlace --replace-fail cmd/seekwatcher --replace 'check_for_ffmpeg("ffmpeg")' 'True'
   '';
 
   propagatedBuildInputs = with python3.pkgs; [
