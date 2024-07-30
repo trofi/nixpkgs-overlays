@@ -63,6 +63,7 @@ let
     "targetPackages"
 
     # cross packagesets
+    "pkgsArocc" # https://github.com/NixOS/nixpkgs/pull/318034#issuecomment-2259165685
     "pkgsLLVM"
     "pkgsMusl"
     "pkgsStatic"
