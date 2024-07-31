@@ -69,6 +69,7 @@ let
     "pkgsStatic"
     "pkgsCross"
     "pkgsi686Linux"
+    "pkgsZig" # https://github.com/NixOS/nixpkgs/pull/318034#issuecomment-2259946676
 
     # workarounds: fecth files from internet
     "vmTools"
