@@ -99,6 +99,7 @@ let
     # At least pkgsLinux.pkgsStatic.aml fails to eval as:
     #   error: attribute 'sharedLibrary' missing
     "pkgsStatic"
+    "pkgsZig" # https://github.com/NixOS/nixpkgs/pull/318034#issuecomment-2259946676
 
     "buildHaskellPackages"
     "buildPackages"
