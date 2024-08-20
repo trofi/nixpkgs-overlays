@@ -21,7 +21,7 @@ final: prev: {
 
   xwayland = prev.xwayland.override {
     libXfont2 = prev.xorg.libXfont2.overrideAttrs (oa: {
-      patches = (oa.patches or []) ++ [
+      patches = (oa.patches or []) ++ prev.lib.optionals (oa.version == "2.0.6")  [
         ../libXfont2/nofollow.patch
       ];
     });
