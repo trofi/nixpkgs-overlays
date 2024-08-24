@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Usage example:
+#   ./all-attrs-iter.bash -I nixpkgs=~/n --arg maxDepth 3 --arg verbose 3 --arg ignoreDrvAttrs false
+
 resume_from=${RESUME_FROM}
 result=$(mktemp)
 
