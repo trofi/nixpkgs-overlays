@@ -155,6 +155,7 @@ let
     #   pythonPackages = self;
     #   coqPackages = self;
     else if ap_last2rev == ["beamPackages" "beamPackages"]
+         || ap_last2rev == ["buildFreebsd" "buildFreebsd"]
          || ap_last2rev == ["buildRustPackages" "buildRustPackages"]
          || ap_last2rev == ["coqPackages" "coqPackages"]
          || ap_last2rev == ["cudaPackages" "cudaPackages"]
