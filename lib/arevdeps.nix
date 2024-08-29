@@ -154,7 +154,8 @@ let
     # skip infinite self-referring attrsets. Typical examples are:
     #   pythonPackages = self;
     #   coqPackages = self;
-    else if ap_last2rev == ["beamPackages" "beamPackages"]
+    else if ap_last2rev == ["__splicedPackages" "__splicedPackages"]
+         || ap_last2rev == ["beamPackages" "beamPackages"]
          || ap_last2rev == ["buildFreebsd" "buildFreebsd"]
          || ap_last2rev == ["buildRustPackages" "buildRustPackages"]
          || ap_last2rev == ["coqPackages" "coqPackages"]
