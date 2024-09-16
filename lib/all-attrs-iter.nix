@@ -46,10 +46,11 @@ let
   };
 
   # logging:
-  err   = s: e: lib.trace "ERROR: ${s}" e;
-  warn  = s: e: if verbose >= 1 then lib.trace "WARN: ${s}" e else e;
-  info  = s: e: if verbose >= 2 then lib.trace "INFO: ${s}" e else e;
+  err = s: e: lib.trace "ERROR: ${s}" e;
+  warn = s: e: if verbose >= 1 then lib.trace "WARN: ${s}" e else e;
+  info = s: e: if verbose >= 2 then lib.trace "INFO: ${s}" e else e;
   debug = s: e: if verbose >= 3 then lib.trace "DEBUG: ${s}" e else e;
+  debug2 = s: e: if verbose >= 4 then lib.trace "DEBUG2: ${s}" e else e;
 
   # root to start at
   rap = if rootAttr != null
@@ -111,11 +112,11 @@ let
           at_pos = lib.length pos == 1 && lib.last pos == lib.last ap;
         in
         if depth >= maxDepth && !at_pos
-        then info "too deep (depth=${toString depth}) nesting of a=${a}, stop" skip
+        then debug2 "too deep (depth=${toString depth}) nesting of a=${a}, stop" skip
         else add_vals args (lib.attrsToList (removeAttrs tree ignoreList));
     in debug "inspecting ${a} (depth=${toString depth}, left=${toString left})" (
-    if      left == 0 then info "${a}: hit step limit" skip
-    else if left < 0 then info "${a}: previous leaf hit step limit, just skip" skip
+    if      left == 0 then debug2 "${a}: hit step limit" skip
+    else if left < 0 then debug2 "${a}: previous leaf hit step limit, just skip" skip
     else if !e.success then info "${a} fails to evaluate" skip
     else if isPrimitive tree then skip
     else if lib.isDerivation tree then add_val (if ignoreDrvAttrs then skip else maybe_go_deeper) {name=a; value=tree;}
