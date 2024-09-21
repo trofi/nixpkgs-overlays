@@ -9,6 +9,10 @@ final: prev: {
     patches = (oa.patches or []) ++ [
       ../cvise/reverse-lines.patch
     ];
+    cmakeFlags = (oa.cmakeFlags or []) ++ [
+      # https://github.com/NixOS/nixpkgs/pull/343565
+      "-DCLANG_FORMAT_PATH=${prev.clang-tools}/bin/clang-format"
+    ];
   });
 
   nixVersions = prev.nixVersions // {
