@@ -35,6 +35,7 @@ stdenv.mkDerivation rec {
   # Update as:
   #    nix-shell ./maintainers/scripts/update.nix --argstr package uselex --arg include-overlays true
   passthru.updateScript = unstableGitUpdater {
+    tagPrefix = "v";
     url = "https://github.com/trofi/uselex";
   };
 
