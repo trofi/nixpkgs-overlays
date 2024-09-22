@@ -61,6 +61,7 @@ stdenv.mkDerivation rec {
   #    nix-shell ./maintainers/scripts/update.nix --argstr package ski --arg include-overlays true
   passthru = {
     updateScript = unstableGitUpdater {
+      tagPrefix = "v";
       url = "https://github.com/trofi/ski.git";
     };
   };
