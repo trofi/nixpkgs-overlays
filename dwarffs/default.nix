@@ -40,6 +40,7 @@ in stdenv.mkDerivation rec {
   # Update as:
   #    nix-shell ./maintainers/scripts/update.nix --argstr package dwarffs --arg include-overlays true
   passthru.updateScript = unstableGitUpdater {
+    tagPrefix = "v";
     url = "https://github.com/edolstra/dwarffs";
   };
 
