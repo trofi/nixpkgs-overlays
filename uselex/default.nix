@@ -28,8 +28,12 @@ stdenv.mkDerivation rec {
   '';
 
   installPhase = ''
+    runHook preInstall
+
     install -d $out/bin
     install -m 0755 uselex.rb $out/bin
+
+    runHook postInstall
   '';
 
   # Update as:
