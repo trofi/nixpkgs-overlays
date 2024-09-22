@@ -13,16 +13,16 @@
 let
   # Does not work against latest `nix`:
   #   https://github.com/edolstra/dwarffs/issues/26
-  nix = nixVersions.nix_2_18;
+  nix = nixVersions.nix_2_20;
 in stdenv.mkDerivation rec {
   pname = "dwarffs";
-  version = "unstable-2023-08-22";
+  version = "2.0.0-unstable-2024-03-27";
 
   src = fetchFromGitHub {
     owner = "edolstra";
     repo = "dwarffs";
-    rev = "1ca3b9298931fc26a5e7d471d5ffee69b90f9ea1";
-    sha256 = "sha256-CgPVVqALgqxOoZOgBZ0PD6qAuGpr9+YgwRPSMVfxoOM=";
+    rev = "6c4a04269ebcf9438447cfd3078a09538043cbb2";
+    sha256 = "sha256-c0KbtYwhsk6+5J8VzmaLoF/hj+YxJfmBBG0QQ/1cB54=";
   };
 
   buildInputs = [ fuse nix nlohmann_json boost ];
