@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
   src = fetchgit {
     url = "https://git.kernel.org/pub/scm/linux/kernel/git/mason/iowatcher.git";
     rev = "13adc03f658ac7ae0986a0d5b9a20c4ac097209b";
-    sha256 = "sha256-Am0fY0trDLaszKxtuuWUl4uFXiMM7ir67vH8rF7Pr2M=";
+    hash = "sha256-Am0fY0trDLaszKxtuuWUl4uFXiMM7ir67vH8rF7Pr2M=";
   };
 
   postPatch = ''
