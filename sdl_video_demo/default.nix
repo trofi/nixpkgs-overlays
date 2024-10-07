@@ -12,13 +12,13 @@
 
 stdenv.mkDerivation rec {
   pname = "sdl_video_demo";
-  version = "0-unstable-2024-06-18";
+  version = "0-unstable-2024-10-02";
 
   src = fetchFromGitHub {
     owner = "hartwork";
     repo = "sdl_video_demo";
-    rev = "80d819d9431014a6bf71d3ec723988f29ba977c5";
-    hash = "sha256-lDYHcEwGHlyuVYSA3ww2MLD7smD5xAEQJl/GAnkhyOA=";
+    rev = "18f73e33e48ab7ce5629e295b687513c567963fb";
+    hash = "sha256-M+8CgoOxsIOEOeEj8YMjQwb60I7XozQgYmgGClze3Kg=";
   };
 
   nativeBuildInputs = [ pkg-config ];
