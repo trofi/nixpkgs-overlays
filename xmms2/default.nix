@@ -55,13 +55,15 @@ in
 
 stdenv.mkDerivation rec {
   pname = "xmms2";
-  version = "0.9.3-unstable-2024-09-22";
+  version = "0.9.4-unstable-2024-10-07";
+  # Drop -unstable-.* suffix.
+  versionBase = lib.concatStringsSep "." (lib.take 3 (lib.versions.splitVersion version));
 
   src = fetchFromGitHub {
     owner = "XMMS2";
     repo = "xmms2-devel";
-    rev = "8fd2f905773b4e2d4f62ce0cedbafd38a8ad7cfa";
-    hash = "sha256-7HB/TWq84r/jWKo8JuCV2ppMEcP66e/NLVjfmv4G7j4=";
+    rev = "231104f63b98846e63b68266dbaabd300c733280";
+    hash = "sha256-YiwrvBff8w65Hp7aaCpkE+rhKro/pwB20RY711iuj0k=";
     fetchSubmodules = true;
   };
 
@@ -125,8 +127,8 @@ stdenv.mkDerivation rec {
     tests = {
         xmms2_release = xmms2.overrideAttrs (oa: {
           src = fetchurl {
-            url = "https://github.com/xmms2/xmms2-devel/releases/download/${version}/xmms2-${version}.tar.bz2";
-            hash = "sha256-O52Zvl2+fSxDTEsnzXwcw8PddUSmc3BcPwZ0s0jrKKM=";
+            url = "https://github.com/xmms2/xmms2-devel/releases/download/${versionBase}/xmms2-${versionBase}.tar.xz";
+            hash = "sha256-EAo10kZwBv4YKJiAQ6kgLoBO2LDpQyat3zK7J2RctCo=";
           };
         });
     };
