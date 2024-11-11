@@ -4,7 +4,6 @@
       autoconf
       automake
       bison
-      flex
       git
       libtool
       python3
