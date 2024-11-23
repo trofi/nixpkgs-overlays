@@ -55,15 +55,15 @@ in
 
 stdenv.mkDerivation rec {
   pname = "xmms2";
-  version = "0.9.4-unstable-2024-11-17";
+  version = "0.9.5-unstable-2024-11-23";
   # Drop -unstable-.* suffix.
   versionBase = lib.concatStringsSep "." (lib.take 3 (lib.versions.splitVersion version));
 
   src = fetchFromGitHub {
     owner = "XMMS2";
     repo = "xmms2-devel";
-    rev = "b6a6e8c20b92eb26791b637c09dded1262d899b5";
-    hash = "sha256-jc6lL/bQ5RXlzu0XuMsbos7RICUX9t0ybp7mn3/G1CE=";
+    rev = "63ae545b675f76c1d32681f2b404e28fb40d5dce";
+    hash = "sha256-k/M4rBDx5Je02Yoo3FfhP9ob1AqLV0LSJOTDtCdVoM8=";
     fetchSubmodules = true;
   };
 
@@ -128,7 +128,7 @@ stdenv.mkDerivation rec {
         xmms2_release = xmms2.overrideAttrs (oa: {
           src = fetchurl {
             url = "https://github.com/xmms2/xmms2-devel/releases/download/${versionBase}/xmms2-${versionBase}.tar.xz";
-            hash = "sha256-EAo10kZwBv4YKJiAQ6kgLoBO2LDpQyat3zK7J2RctCo=";
+            hash = "sha256-aV8jBeQIXp16B8q8bFZpoApVdF/n1gE2Ud0h+h9iEzM=";
           };
         });
     };
