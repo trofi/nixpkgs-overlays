@@ -22,13 +22,13 @@
 
 stdenv.mkDerivation rec {
   pname = "ski";
-  version = "1.4.0-unstable-2024-11-17";
+  version = "1.5.0-unstable-2024-11-23";
 
   src = fetchFromGitHub {
     owner = "trofi";
     repo = "ski";
-    rev = "be3dee3e6ca7ba702cba14d8db7e65e050b6b6a6";
-    hash = "sha256-wWYOXBCkf5vEBMFoz9dJCXqCVXarrmT7MO0X3z2ACcU=";
+    rev = "913a4d0a04b868539c8104a1da946185e181e3bc";
+    hash = "sha256-OT4Vg0Iwukp2CvfER8fP0g66K1o65NDniYZ9QBrGVUc=";
   };
 
   postPatch = ''
