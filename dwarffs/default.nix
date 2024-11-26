@@ -13,7 +13,7 @@
 let
   # Does not work against latest `nix`:
   #   https://github.com/edolstra/dwarffs/issues/26
-  nix = nixVersions.nix_2_20;
+  nix = nixVersions.nix_2_19;
 in stdenv.mkDerivation rec {
   pname = "dwarffs";
   version = "2.0.0-unstable-2024-03-27";
