@@ -9,6 +9,8 @@ pkgs.mkShell {
     freeglut
     libglvnd
     mesa_glu
+    meson
+    ninja
     pkg-config
   ];
 }
