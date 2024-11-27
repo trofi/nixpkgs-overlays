@@ -1,7 +1,3 @@
-# enter as:
-# $ nix develop --impure --expr 'with import ~/n {}; gcc.cc'
-# Can't get fully built, but xg++ is there
-
 { pkgs ? import <nixpkgs> {} }:
 
 pkgs.mkShell {
