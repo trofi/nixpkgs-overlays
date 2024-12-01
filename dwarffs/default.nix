@@ -1,6 +1,7 @@
 { lib
 , stdenv
 , fetchFromGitHub
+, fetchpatch
 
 , boost
 , fuse
@@ -11,19 +12,27 @@
 }:
 
 let
-  # Does not work against latest `nix`:
-  #   https://github.com/edolstra/dwarffs/issues/26
-  nix = nixVersions.nix_2_19;
+  nix = nixVersions.latest;
 in stdenv.mkDerivation rec {
   pname = "dwarffs";
-  version = "2.0.0-unstable-2024-03-27";
+  version = "3.0.0-unstable-2024-09-26";
 
   src = fetchFromGitHub {
     owner = "edolstra";
     repo = "dwarffs";
-    rev = "6c4a04269ebcf9438447cfd3078a09538043cbb2";
-    sha256 = "sha256-c0KbtYwhsk6+5J8VzmaLoF/hj+YxJfmBBG0QQ/1cB54=";
+    rev = "8198868ec11d8c14f91543df1db7d7242de8c225";
+    sha256 = "sha256-aacxGucADmIfuFmSdCS7WrmPXFBhojADmSOHhIiUTKA=";
   };
+
+  patches = [
+    # https://github.com/edolstra/dwarffs/pull/30
+    (fetchpatch {
+      name = "nix-2.25.patch";
+      url = "https://github.com/edolstra/dwarffs/pull/30.patch";
+      hash = "sha256-1IbOqgdAA43qnqGCeDl13c5BSTjz3HhlMTlzYsEPLj4=";
+      includes = [ "dwarffs.cc" ];
+    })
+  ];
 
   buildInputs = [ fuse nix nlohmann_json boost ];
   env.NIX_CFLAGS_COMPILE = "-I ${nix.dev}/include/nix -include ${nix.dev}/include/nix/config.h -D_FILE_OFFSET_BITS=64 -DVERSION=\"${version}\"";
