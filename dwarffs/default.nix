@@ -1,7 +1,6 @@
 { lib
 , stdenv
 , fetchFromGitHub
-, fetchpatch
 
 , boost
 , fuse
@@ -15,24 +14,14 @@ let
   nix = nixVersions.latest;
 in stdenv.mkDerivation rec {
   pname = "dwarffs";
-  version = "3.0.0-unstable-2024-09-26";
+  version = "3.0.0-unstable-2024-12-02";
 
   src = fetchFromGitHub {
     owner = "edolstra";
     repo = "dwarffs";
-    rev = "8198868ec11d8c14f91543df1db7d7242de8c225";
-    sha256 = "sha256-aacxGucADmIfuFmSdCS7WrmPXFBhojADmSOHhIiUTKA=";
+    rev = "09f5b6d21ce35fc1de2fd338faa89d0618534ef1";
+    sha256 = "sha256-Flmc3JZFH6pehFZV3FPmwpQtiByWgbdv6INV0LmSb0M=";
   };
-
-  patches = [
-    # https://github.com/edolstra/dwarffs/pull/30
-    (fetchpatch {
-      name = "nix-2.25.patch";
-      url = "https://github.com/edolstra/dwarffs/pull/30.patch";
-      hash = "sha256-1IbOqgdAA43qnqGCeDl13c5BSTjz3HhlMTlzYsEPLj4=";
-      includes = [ "dwarffs.cc" ];
-    })
-  ];
 
   buildInputs = [ fuse nix nlohmann_json boost ];
   env.NIX_CFLAGS_COMPILE = "-I ${nix.dev}/include/nix -include ${nix.dev}/include/nix/config.h -D_FILE_OFFSET_BITS=64 -DVERSION=\"${version}\"";
