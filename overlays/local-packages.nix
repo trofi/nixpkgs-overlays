@@ -15,6 +15,8 @@ final: prev: {
   audio_pump_demo = final.callPackage ../audio_pump_demo {};
   sdl_video_demo = final.callPackage ../sdl_video_demo {};
 
+  chua = final.callPackage ../chua {};
+
   dwarffs = final.callPackage ../dwarffs {};
 
   iowatcher = final.callPackage ../iowatcher {};
