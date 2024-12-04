@@ -15,10 +15,13 @@
       flex
       gperf
       pkg-config
+      # prepare for switch from autotools to meson:
+      meson
+      ninja
 
       # for release tarballs
-      pkgs.lzip
-      pkgs.xz
+      lzip
+      xz
     ];
     shellHook = ''
       mkj() { make -j$(nproc) "$@"; }
