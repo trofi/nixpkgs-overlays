@@ -4,6 +4,7 @@
       autoconf
       automake
       bison
+      cmake
       git
       libtool
       python3
