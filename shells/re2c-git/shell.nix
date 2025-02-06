@@ -5,6 +5,7 @@
       automake
       bison
       cmake
+      gbenchmark
       git
       libtool
       python3
