@@ -9,6 +9,12 @@
 }:
 {
   topLevel = [
+    # Disable known broken less-exercised python atrributes:
+    #     https://github.com/NixOS/nixpkgs/issues/340183
+    "pypy27Packages"
+    "pypy2Packages"
+    "pypyPackages"
+
     # workaroound: fails eval
     "swiftPackages"
 
