@@ -23,8 +23,19 @@ in stdenv.mkDerivation rec {
     sha256 = "sha256-Flmc3JZFH6pehFZV3FPmwpQtiByWgbdv6INV0LmSb0M=";
   };
 
-  buildInputs = [ fuse nix nlohmann_json boost ];
-  env.NIX_CFLAGS_COMPILE = "-I ${nix.dev}/include/nix -include ${nix.dev}/include/nix/config.h -D_FILE_OFFSET_BITS=64 -DVERSION=\"${version}\"";
+  buildInputs = [
+    boost
+    fuse
+    nix
+    nlohmann_json
+  ];
+
+  env.NIX_CFLAGS_COMPILE = toString [
+    "-I ${nix.dev}/include/nix"
+    "-include ${nix.dev}/include/nix/config.hh"
+    "-D_FILE_OFFSET_BITS=64"
+    "-DVERSION=\"${version}\""
+  ];
 
   installPhase = ''
     runHook preInstall
