@@ -32,7 +32,9 @@ in stdenv.mkDerivation rec {
 
   env.NIX_CFLAGS_COMPILE = toString [
     "-I ${nix.dev}/include/nix"
-    "-include ${nix.dev}/include/nix/config.hh"
+    "-I ${nix.dev}/include/nix/main"
+    "-I ${nix.dev}/include/nix/store"
+    "-I ${nix.dev}/include/nix/util"
     "-D_FILE_OFFSET_BITS=64"
     "-DVERSION=\"${version}\""
   ];
