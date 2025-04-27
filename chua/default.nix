@@ -15,13 +15,13 @@
 
 stdenv.mkDerivation rec {
   pname = "chua";
-  version = "0-unstable-2024-11-27";
+  version = "0-unstable-2024-12-04";
 
   src = fetchFromGitHub {
     owner = "trofi";
     repo = "chua";
-    rev = "f2bd7c4b8d785243fbfe9a9ccd8f9e90818e726d";
-    hash = "sha256-v9BDmL8WGuBnUZ6BcS4DBvETowd9ww/Nd5mEKTr4fL0=";
+    rev = "3400b62494d51bffe9acee98f623e3a40084ecfd";
+    hash = "sha256-VuMF50vH494QdARAF29/RDkwYs4TZyJfVBgqxUUhec4=";
   };
 
   nativeBuildInputs = [
