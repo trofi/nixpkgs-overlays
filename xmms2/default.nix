@@ -55,15 +55,15 @@ in
 
 stdenv.mkDerivation rec {
   pname = "xmms2";
-  version = "0.9.5-unstable-2024-11-23";
+  version = "0.9.5-unstable-2025-03-31";
   # Drop -unstable-.* suffix.
   versionBase = lib.concatStringsSep "." (lib.take 3 (lib.versions.splitVersion version));
 
   src = fetchFromGitHub {
     owner = "XMMS2";
     repo = "xmms2-devel";
-    rev = "63ae545b675f76c1d32681f2b404e28fb40d5dce";
-    hash = "sha256-k/M4rBDx5Je02Yoo3FfhP9ob1AqLV0LSJOTDtCdVoM8=";
+    rev = "7ede0223b85da37f0edb35a99b8020e2a52aea46";
+    hash = "sha256-mzDRCFQ4Yl2Fzz2DKc8xQCsZv61JXb/RFHbpYACFgR0=";
     fetchSubmodules = true;
   };
 
