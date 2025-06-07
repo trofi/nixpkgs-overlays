@@ -12,14 +12,15 @@
 # Usage example:
 # $ ./all-attrs-iter.bash -I nixpkgs=/home/slyfox/n --arg maxDepth 3 --arg stepLimit 30 --arg ignoreDrvAttrs false --arg verbose 3 --argstr rootAttr pkgsLLVM
 
-{ nixpkgs ? import <nixpkgs> {
+{ system ? null
+, nixpkgs ? import <nixpkgs> ({
     config = {
       # TODO:
       #allowAliases = false;
       #allowBroken = true;
       #allowUnfree = true;
     };
-  }
+  } // (if system != null then { inherit system; } else {}))
 , rootAttr ? null
 , verbose ? 1 # warn
 
