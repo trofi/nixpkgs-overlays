@@ -127,10 +127,6 @@ let
     "ghcjs"
     "ghcjs810"
     "ocaml-ng"
-
-    # has errors:
-    "janeStreet_0_15"
-    "ocamlPackages_4_14_janeStreet_0_15"
   ];
 
   # helpers
