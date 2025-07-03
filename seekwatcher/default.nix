@@ -9,6 +9,7 @@
 python3.pkgs.buildPythonApplication rec {
   pname = "seekwatcher";
   version = "0.15";
+  pyproject = true;
 
   src = fetchFromGitHub {
     owner = "trofi";
@@ -26,8 +27,12 @@ python3.pkgs.buildPythonApplication rec {
       substituteInPlace cmd/seekwatcher --replace-fail 'check_for_ffmpeg("ffmpeg")' 'True'
   '';
 
+  nativeBuildInputs = with python3.pkgs; [
+    cython numpy matplotlib setuptools
+  ];
+
   propagatedBuildInputs = with python3.pkgs; [
-    cython numpy matplotlib
+    cython numpy matplotlib setuptools
   ];
 
   meta = with lib; {
