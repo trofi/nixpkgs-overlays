@@ -23,6 +23,10 @@ in stdenv.mkDerivation rec {
     sha256 = "sha256-Flmc3JZFH6pehFZV3FPmwpQtiByWgbdv6INV0LmSb0M=";
   };
 
+  postPatch = ''
+    substituteInPlace Makefile --replace ' -std=c++20' ' -std=c++23'
+  '';
+
   buildInputs = [
     boost
     fuse
