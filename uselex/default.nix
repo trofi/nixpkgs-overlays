@@ -2,13 +2,13 @@
 , stdenv
 , fetchFromGitHub
 
-, ruby_3_1
+, ruby
 , binutils-unwrapped-all-targets
 
 , unstableGitUpdater
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   pname = "uselex";
   version = "0.0.1-unstable-2023-09-22";
 
@@ -19,7 +19,7 @@ stdenv.mkDerivation rec {
     hash = "sha256-QNC+ieGhS0Wu0t9s2dxagmx5LT0PtVW779qU+l11AVA=";
   };
 
-  buildInputs = [ ruby_3_1 ];
+  buildInputs = [ ruby ];
 
   postPatch = ''
     patchShebangs
