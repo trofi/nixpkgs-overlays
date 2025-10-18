@@ -5,14 +5,6 @@ final: prev: {
     ];
   });
 
-  nixVersions = prev.nixVersions // {
-    unstable = (prev.nixVersions.latest or prev.nixVersions.unstable).overrideAttrs(oa: {
-      patches = (oa.patches or []) ++ [
-        ../nix/editor-no-nl.patch
-      ];
-    });
-  };
-
   xwayland = prev.xwayland.override {
     libXfont2 = prev.xorg.libXfont2.overrideAttrs (oa: {
       patches = (oa.patches or []) ++ prev.lib.optionals (oa.version == "2.0.6")  [
