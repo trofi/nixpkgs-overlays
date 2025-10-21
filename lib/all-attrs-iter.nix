@@ -26,7 +26,7 @@
 
 , maxDepth
 # last item processed successfully
-, resumeFrom ? null
+, resumeFrom ? []
 , stepLimit ? 1000
 
 , ignoreCross ? true
@@ -63,9 +63,7 @@ let
 
   start_depth = lib.length rap;
   # attribute path relative to the specified root
-  resumeap = if resumeFrom != null
-             then lib.drop start_depth (lib.splitString "." resumeFrom)
-             else [];
+  resumeap = lib.drop start_depth resumeFrom;
 
   # other helpers:
   isPrimitive = v: lib.isFunction v
@@ -87,7 +85,7 @@ let
                    then ignorable.topLevel
                    else ignorable.anyLevel;
       skip = args // { left = left - 1; }
-                  // (if left == 0 then { stop_at = a; } else {});
+                  // (if left == 0 then { stop_at = ap; } else {});
 
       # Val: { name, value }
       # :: Ctx -> Val -> Ctx
@@ -95,7 +93,7 @@ let
       add_val = ctx: v: ctx // { left = left - 1; }
                             // (
         if left < 0 then {}
-        else if left == 0 then { stop_at = a; }
+        else if left == 0 then { stop_at = ap; }
         else { result = result ++ [v.name]; });
       # TODO: short-circuit fold when the limit is hit
       add_vals = ctx: vs:
@@ -131,6 +129,6 @@ let
     else warn "unhandled type of ${a}" skip);
 in removeAttrs (go start_depth rap root resumeap {
   result = [];
-  stop_at = null;
+  stop_at = [];
   left = stepLimit;
 }) ["tree"]

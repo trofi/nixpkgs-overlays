@@ -5,7 +5,7 @@
 
 resume_from=${RESUME_FROM}
 if [[ -z ${resume_from} ]]; then
-    resume_from='""'
+    resume_from="[]"
 fi
 result=$(mktemp)
 
@@ -32,7 +32,8 @@ while :; do
     fi
     resume_from=${next_attr}
 
-    [[ $resume_from == "null" ]] && break
+    # TODO: how to express success? add a bool attribute
+    [[ $resume_from == "[ ]" ]] && break
 done
 
 rm "$result"
