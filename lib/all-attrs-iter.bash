@@ -7,7 +7,7 @@ resume_from=${RESUME_FROM}
 result=$(mktemp)
 
 while :; do
-    printf "Continuing from '$resume_from'\n" >&2
+    printf "Continuing from '%s'\n" "${resume_from}" >&2
     nix-instantiate --json --strict --eval --read-write-mode \
         all-attrs-iter.nix \
         --arg maxDepth 1 \
@@ -24,7 +24,12 @@ while :; do
     #jq <"$result"
     #echo "status: $status"
 
-    resume_from=$(jq --raw-output '.stop_at' < "$result")
+    next_attr=$(jq --raw-output '.stop_at' < "$result")
+    if [[ "${next_attr}" == "${resume_from}" ]]; then
+        printf "ERROR: stuck on '%s' attribute\n" "${next_attr}" >&2
+        break
+    fi
+    resume_from=${next_attr}
 
     [[ $resume_from == "null" ]] && break
 done
