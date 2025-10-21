@@ -24,7 +24,7 @@
 , rootAttr ? null
 , verbose ? 1 # warn
 
-, maxDepth
+, maxDepth ? 1
 # last item processed successfully
 , resumeFrom ? []
 , stepLimit ? 1000

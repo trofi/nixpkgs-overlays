@@ -13,7 +13,6 @@ while :; do
     printf "Continuing from '%s'\n" "${resume_from}" >&2
     nix-instantiate --strict --eval --read-write-mode \
         all-attrs-iter.nix \
-        --arg maxDepth 1 \
         --arg resumeFrom "$resume_from" \
         \
         "$@" >"$result"
