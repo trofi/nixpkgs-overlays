@@ -10,7 +10,7 @@
 # - We return the progress so far to continue from there.
 
 # Usage example:
-# $ ./all-attrs-iter.bash -I nixpkgs=/home/slyfox/n --arg maxDepth 3 --arg stepLimit 30 --arg ignoreDrvAttrs false --arg verbose 3 --argstr rootAttr pkgsLLVM
+# $ ./all-attrs-iter.bash -I nixpkgs=/home/slyfox/n --arg maxDepth 3 --arg stepLimit 30 --arg ignoreDrvAttrs false --arg verbose 3 --arg rootAttr '["pkgsLLVM"]'
 
 { system ? null
 , nixpkgs ? import <nixpkgs> ({
@@ -21,7 +21,7 @@
       #allowUnfree = true;
     };
   } // (if system != null then { inherit system; } else {}))
-, rootAttr ? null
+, rootAttr ? []
 , verbose ? 1 # warn
 
 , maxDepth ? 1
@@ -54,11 +54,9 @@ let
   debug2 = s: e: if verbose >= 4 then lib.trace "DEBUG2: ${s}" e else e;
 
   # root to start at
-  rap = if rootAttr != null
-        then lib.splitString "." rootAttr
-        else [];
+  rap = rootAttr;
   root = lib.attrByPath rap
-                        (warn "did not find ${rootAttr}" {})
+                        (warn "did not find ${lib.showAttrPath rootAttr}" {})
                         nixpkgs;
 
   start_depth = lib.length rap;
@@ -123,7 +121,7 @@ let
     else if lib.isDerivation tree then add_val (if ignoreDrvAttrs then skip else maybe_go_deeper) {name=a; value=tree;}
     # Skip "foo = self;" attributes like `pythonPackages.pythonPackages`
     # TODO: might skip too much.
-    else if lib.isAttrs tree && depth > 0 && lib.hasAttr (lib.last ap) tree && rootAttr != a then info "${a} is a repeated attribute, skipping" skip
+    else if lib.isAttrs tree && depth > 0 && lib.hasAttr (lib.last ap) tree && rootAttr != ap then info "${a} is a repeated attribute, skipping" skip
     else if lib.isAttrs tree then maybe_go_deeper
     # should not get here
     else warn "unhandled type of ${a}" skip);
