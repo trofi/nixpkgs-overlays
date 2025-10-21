@@ -79,6 +79,8 @@ let
 
   go = depth: ap: tree: pos: {result, left, stop_at}@args:
     let
+      # TODO: 'showAttrPath' adds extra quotes around identifiers
+      # that start from numbers. We don't parse them well above.
       a = lib.showAttrPath ap;
       e = builtins.tryEval tree;
       ignoreList = if depth == 0 || depth == start_depth
