@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Usage example:
-#   ./all-attrs-iter.bash -I nixpkgs=~/n --arg maxDepth 3 --arg verbose 3 --arg ignoreDrvAttrs false
+#   ./all-attrs-iter.bash -I nixpkgs=~/n --arg maxDepth 3 --arg verbose 2 --arg ignoreDrvAttrs false --arg stepLimit 10000
 
 resume_from=${RESUME_FROM}
 if [[ -z ${resume_from} ]]; then
