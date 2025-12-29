@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Usage example:
-#   ./all-attrs-iter.bash -I nixpkgs=~/n --arg maxDepth 4 --arg verbose 3 --arg ignoreDrvAttrs false --arg stepLimit 10000:
+#   GC_INITIAL_HEAP_SIZE=$((10 * 1024 * 1024 * 1024)) ./all-attrs-iter.bash -I nixpkgs=~/n --arg maxDepth 4 --arg verbose 3 --arg ignoreDrvAttrs false --arg stepLimit 10000
 
 resume_from=${RESUME_FROM}
 if [[ -z ${resume_from} ]]; then
