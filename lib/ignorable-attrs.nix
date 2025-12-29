@@ -52,6 +52,7 @@
     "pkgs"
 
     # Avoid explosion like pkgsLLVM.pkgsCross, pkgsCross.pkgsLLVM
+    "pkgsForCudaArch"
     "pkgsLLVM"
     "pkgsMusl"
     "pkgsStatic"
