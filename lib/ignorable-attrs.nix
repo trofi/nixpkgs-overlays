@@ -9,12 +9,6 @@
 }:
 {
   topLevel = [
-    # Disable known broken less-exercised python atrributes:
-    #     https://github.com/NixOS/nixpkgs/issues/340183
-    "pypy27Packages"
-    "pypy2Packages"
-    "pypyPackages"
-
     # workaroound: fails eval
     "swiftPackages"
 
@@ -58,6 +52,12 @@
     "pkgsStatic"
     "pkgsCross"
     "pkgsi686Linux"
+
+    # Disable known broken less-exercised python atrributes:
+    #     https://github.com/NixOS/nixpkgs/issues/340183
+    "pypy27Packages"
+    "pypy2Packages"
+    "pypyPackages"
 
     # causes derivation evalutaion, not usually needed if we traverse
     # every other attribute.
