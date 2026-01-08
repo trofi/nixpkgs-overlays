@@ -7,7 +7,7 @@
 , ignoreCross ? true
 , ignoreDrvAttrs ? true
 }:
-{
+rec {
   topLevel = [
     # workaroound: fails eval
     "swiftPackages"
@@ -20,7 +20,7 @@
     "nixosTests"
   ];
 
-  anyLevel = [
+  anyLevel = topLevel ++ [
     # Usually contains full package set most of which are not used for
     # bootstrap.
     "__bootPackages"
