@@ -79,9 +79,7 @@ let
       # that start from numbers. We don't parse them well above.
       a = lib.showAttrPath ap;
       e = builtins.tryEval tree;
-      ignoreList = if depth == 0 || depth == start_depth
-                   then ignorable.topLevel
-                   else ignorable.anyLevel;
+      ignoreList = ignorable.anyLevel;
       skip = args // { left = left - 1; }
                   // (if left == 0 then { stop_at = ap; } else {});
 
