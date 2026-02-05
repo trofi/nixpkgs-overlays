@@ -40,7 +40,7 @@ pkgs.mkShell {
     vulkan-loader
     wayland
     xcb-util-cursor
-    xorg.libxcb
+    libxcb
     xwayland
   ];
 }
