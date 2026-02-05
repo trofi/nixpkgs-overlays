@@ -10,7 +10,7 @@
       slang
       openssl
       libssh2
-      xorg.libX11
+      libx11
       gpm
       file
       pkg-config
