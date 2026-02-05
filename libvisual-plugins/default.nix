@@ -7,7 +7,10 @@
 , libGL
 , libvisual
 , mesa_glu
-, xorg
+, libice
+, libx11
+, libxt
+, libxxf86vm
 
 , bison
 , flex
@@ -35,10 +38,10 @@ stdenv.mkDerivation rec {
     libGL
     libvisual
     mesa_glu
-    xorg.libICE
-    xorg.libX11
-    xorg.libXxf86vm
-    xorg.libXt
+    libice
+    libx11
+    libxt
+    libxxf86vm
   ];
 
   configureFlags = [
