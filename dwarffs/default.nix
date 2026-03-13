@@ -11,7 +11,7 @@
 }:
 
 let
-  nix = nixVersions.latest;
+  nix = nixVersions.nix_2_28;
 in stdenv.mkDerivation rec {
   pname = "dwarffs";
   version = "3.0.0-unstable-2024-12-02";
