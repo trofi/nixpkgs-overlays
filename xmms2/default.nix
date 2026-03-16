@@ -32,6 +32,7 @@
 , libsndfile
 , libvisual, SDL
 , libvorbis
+, monkeys-audio
 , mpg123
 , python3Packages
 , perl
@@ -89,6 +90,7 @@ stdenv.mkDerivation rec {
     libsndfile
     libvisual SDL
     libvorbis
+    monkeys-audio
     mpg123
     readline
     perl
